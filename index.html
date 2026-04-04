@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Scripture — God's Word for Today</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* ============================================================
+       RESET & VARIABLES
+    ============================================================ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold:        #D4A843;
+      --gold-light:  #FFD700;
+      --deep-blue:   #1B2E6B;
+      --purple:      #4B2D8F;
+      --parchment:   #FDF6E3;
+      --cream:       #FFF8E7;
+      --warm-brown:  #6B4400;
+      --indigo:      #312E81;
+      --text-dark:   #2C1810;
+      --text-med:    #4A3728;
+    }
+
+    /* ============================================================
+       BODY
+    ============================================================ */
+    body {
+      background: radial-gradient(ellipse at 18% 18%, #FFF3E0 0%, #FDEAC8 50%, #F0D9B5 100%);
+      min-height: 100vh;
+      font-family: 'Lora', serif;
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       FLOATING PARTICLES
+    ============================================================ */
+    #particles-wrap {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .ptcl {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,215,0,0.8), transparent 70%);
+      animation: floatUp linear infinite;
+      opacity: 0;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(105vh) rotate(0deg);   opacity: 0; }
+      8%   { opacity: .5; }
+      92%  { opacity: .2; }
+      100% { transform: translateY(-8vh)  rotate(540deg); opacity: 0; }
+    }
+
+    /* ============================================================
+       HEADER
+    ============================================================ */
+    header {
+      position: relative;
+      background: linear-gradient(135deg, #0d0b22 0%, #1e1b4b 35%, #2e1065 65%, #1B2E6B 100%);
+      padding: 64px 20px 88px;
+      text-align: center;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    /* glow orb behind title */
+    .hdr-glow {
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,215,0,.12) 0%, transparent 68%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation: glowPulse 5s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%,100% { transform: translate(-50%,-50%) scale(1);   opacity:.6; }
+      50%      { transform: translate(-50%,-50%) scale(1.25); opacity:1; }
+    }
+
+    /* twinkling stars in header */
+    #hdr-stars { position: absolute; inset: 0; }
+    .star {
+      position: absolute;
+      background: #FFD700;
+      border-radius: 50%;
+      animation: twinkle ease-in-out infinite;
+    }
+    @keyframes twinkle {
+      0%,100% { opacity:.15; transform:scale(1); }
+      50%      { opacity:1;   transform:scale(1.8); }
+    }
+
+    /* decorative cross / dove SVG behind header */
+    .hdr-cross {
+      position: absolute;
+      bottom: -20px; right: 30px;
+      opacity: .06;
+      font-size: 10rem;
+      color: white;
+      line-height: 1;
+    }
+
+    .crown-row {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      position: relative; z-index: 2;
+      filter: drop-shadow(0 0 12px rgba(255,215,0,.9));
+      animation: crownGlow 3s ease-in-out infinite;
+    }
+    @keyframes crownGlow {
+      0%,100% { filter: drop-shadow(0 0 10px rgba(255,215,0,.7)); }
+      50%      { filter: drop-shadow(0 0 24px rgba(255,215,0,1)); }
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5.5vw, 3.8rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #FFD700 0%, #FFF8DC 45%, #FFD700 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative; z-index: 2;
+      margin-bottom: 8px;
+      letter-spacing: -.01em;
+    }
+
+    .hdr-subtitle {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,.78);
+      letter-spacing: .06em;
+      position: relative; z-index: 2;
+      margin-bottom: 18px;
+    }
+
+    .date-pill {
+      display: inline-block;
+      background: rgba(255,215,0,.18);
+      border: 1px solid rgba(255,215,0,.5);
+      color: #FFD700;
+      padding: 7px 22px;
+      border-radius: 50px;
+      font-family: 'Nunito', sans-serif;
+      font-size: .9rem;
+      font-weight: 700;
+      position: relative; z-index: 2;
+      letter-spacing: .04em;
+    }
+
+    /* ============================================================
+       WAVE DIVIDER
+    ============================================================ */
+    .wave {
+      position: relative;
+      margin-top: -2px;
+      line-height: 0;
+    }
+    .wave svg { display: block; width: 100%; }
+
+    /* ============================================================
+       MAIN
+    ============================================================ */
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 44px 20px 70px;
+      position: relative; z-index: 1;
+    }
+
+    /* ============================================================
+       INTRO QUOTE
+    ============================================================ */
+    .intro-quote {
+      text-align: center;
+      font-style: italic;
+      color: var(--text-med);
+      font-size: 1.05rem;
+      margin-bottom: 44px;
+      opacity: 0;
+      animation: riseIn .8s ease .3s forwards;
+    }
+    .intro-quote span {
+      display: inline-block;
+      padding: 14px 28px;
+      background: rgba(255,255,255,.65);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 12px 12px 0;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ============================================================
+       READINGS GRID
+    ============================================================ */
+    .readings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 36px;
+    }
+    @media (max-width: 740px) {
+      .readings-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       CARD BASE
+    ============================================================ */
+    .card {
+      border-radius: 22px;
+      padding: 32px 30px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 44px rgba(0,0,0,.1);
+      opacity: 0;
+      animation: riseIn .8s ease forwards;
+    }
+
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* watercolour blob decorations inside cards */
+    .card::before {
+      content: '';
+      position: absolute;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      top: -60px; right: -60px;
+      opacity: .07;
+    }
+    .card::after {
+      content: '';
+      position: absolute;
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      bottom: -40px; left: -30px;
+      opacity: .06;
+    }
+
+    /* ---- OT card ---- */
+    .ot-card {
+      background: linear-gradient(145deg, #FFFBF0 0%, #FFF4D2 100%);
+      border: 2px solid #D4A843;
+      animation-delay: .5s;
+    }
+    .ot-card::before { background: #D4A843; }
+    .ot-card::after  { background: #A87B2A; }
+
+    /* ---- NT card ---- */
+    .nt-card {
+      background: linear-gradient(145deg, #F0F4FF 0%, #E6EBFF 100%);
+      border: 2px solid #6366F1;
+      animation-delay: .7s;
+    }
+    .nt-card::before { background: #6366F1; }
+    .nt-card::after  { background: #4338CA; }
+
+    /* card emoji watermark */
+    .card-watermark {
+      position: absolute;
+      top: -8px; right: 14px;
+      font-size: 5.5rem;
+      opacity: .07;
+      transform: rotate(14deg);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    /* pill label */
+    .card-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 50px;
+      font-family: 'Nunito', sans-serif;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .ot-card .card-label { background: rgba(212,168,67,.18); color: #7A5500; }
+    .nt-card .card-label { background: rgba(99,102,241,.15); color: #3730A3; }
+
+    /* passage title */
+    .passage-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+    .ot-card .passage-title { color: var(--warm-brown); }
+    .nt-card .passage-title { color: var(--indigo); }
+
+    /* reference */
+    .passage-ref {
+      font-family: 'Nunito', sans-serif;
+      font-size: .88rem;
+      font-weight: 700;
+      opacity: .6;
+      margin-bottom: 18px;
+    }
+
+    /* divider */
+    .card-rule {
+      height: 2px;
+      border-radius: 1px;
+      margin-bottom: 20px;
+    }
+    .ot-card .card-rule { background: linear-gradient(to right, #D4A843, transparent); }
+    .nt-card .card-rule { background: linear-gradient(to right, #6366F1, transparent); }
+
+    /* verse text */
+    .verse-text {
+      font-size: 1.05rem;
+      line-height: 1.95;
+      color: var(--text-dark);
+      min-height: 160px;
+    }
+    .v-num {
+      font-size: .63em;
+      vertical-align: super;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      margin-right: 1px;
+      opacity: .55;
+    }
+
+    /* ============================================================
+       LOADING DOTS
+    ============================================================ */
+    .loader {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 160px;
+      font-family: 'Nunito', sans-serif;
+      font-size: .95rem;
+      color: #aaa;
+      font-style: italic;
+    }
+    .dots { display: flex; gap: 5px; }
+    .dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      animation: boing 1.3s ease infinite;
+    }
+    .ot-card .dot { background: #D4A843; }
+    .nt-card .dot { background: #6366F1; }
+    .dot:nth-child(1){ animation-delay: 0s; }
+    .dot:nth-child(2){ animation-delay: .18s; }
+    .dot:nth-child(3){ animation-delay: .36s; }
+    @keyframes boing {
+      0%,55%,100% { transform: translateY(0);   opacity: .5; }
+      28%          { transform: translateY(-13px); opacity: 1; }
+    }
+
+    /* ============================================================
+       REFLECTION BOX
+    ============================================================ */
+    .reflection {
+      background: linear-gradient(135deg, #1B2E6B 0%, #2e1065 100%);
+      color: white;
+      padding: 36px 40px;
+      border-radius: 22px;
+      text-align: center;
+      margin-bottom: 40px;
+      box-shadow: 0 12px 44px rgba(27,46,107,.3);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: riseIn .8s ease 1s forwards;
+    }
+    .reflection::before {
+      content: '💭';
+      position: absolute;
+      font-size: 10rem;
+      top: -20px; right: -10px;
+      opacity: .04;
+    }
+    .reflection h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: #FFD700;
+      margin-bottom: 14px;
+    }
+    .reflection p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,.88);
+      font-style: italic;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* ============================================================
+       ERROR STATE
+    ============================================================ */
+    .err-msg {
+      font-family: 'Nunito', sans-serif;
+      font-size: .9rem;
+      color: #c0392b;
+      text-align: center;
+      padding: 20px;
+      background: rgba(192,57,43,.07);
+      border-radius: 10px;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      text-align: center;
+      padding: 28px 20px 36px;
+      font-family: 'Nunito', sans-serif;
+      font-size: .82rem;
+      color: rgba(44,24,16,.45);
+      position: relative; z-index: 1;
+    }
+    footer .footer-heart { color: #c0392b; }
+
+    /* ============================================================
+       ILLUSTRATED ACCENTS (CSS drawn dove + rays)
+    ============================================================ */
+    .illustrated-sep {
+      text-align: center;
+      margin: 0 0 36px;
+      opacity: 0;
+      animation: riseIn .8s ease .45s forwards;
+    }
+    .illustrated-sep svg {
+      width: 260px;
+      height: 60px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== FLOATING PARTICLES ========== -->
+<div id="particles-wrap"></div>
+
+<!-- ========== HEADER ========== -->
+<header>
+  <div class="hdr-glow"></div>
+  <div id="hdr-stars"></div>
+  <div class="hdr-cross">✝</div>
+  <div class="crown-row">✦ ✦ ✦</div>
+  <h1>Daily Scripture</h1>
+  <p class="hdr-subtitle">God's Word — Fresh Every Morning</p>
+  <div class="date-pill" id="date-pill">Loading date…</div>
+</header>
+
+<!-- ========== WAVE ========== -->
+<div class="wave">
+  <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,35 C200,65 400,5 600,35 C800,65 1000,5 1200,35 C1320,50 1400,40 1440,35 L1440,70 L0,70 Z"
+          fill="#FDF6E3" opacity=".6"/>
+    <path d="M0,50 C300,25 600,60 900,45 C1100,35 1300,55 1440,50 L1440,70 L0,70 Z"
+          fill="#FFF8E7" opacity=".5"/>
+  </svg>
+</div>
+
+<!-- ========== MAIN ========== -->
+<main>
+
+  <!-- Intro quote -->
+  <div class="intro-quote">
+    <span>"Thy word is a lamp unto my feet, and a light unto my path." — Psalm 119:105</span>
+  </div>
+
+  <!-- Illustrated separator (sun-ray SVG) -->
+  <div class="illustrated-sep">
+    <svg viewBox="0 0 260 60" xmlns="http://www.w3.org/2000/svg">
+      <!-- rays -->
+      <g transform="translate(130,30)" stroke="#D4A843" stroke-width="1.5" opacity=".5">
+        <line x1="0" y1="-28" x2="0"  y2="-14" transform="rotate(0)"/>
+        <line x1="0" y1="-28" x2="0"  y2="-14" transform="rotate(30)"/>
+        <line x1="0" y1="-28" x2="0"  y2="-14" transform="rotate(60)"/>
+        <line x1="0" y1="-28" x2="0"  y2="-14" transform="rotate(90)"/>
+        <line x1="0" y1="-28" x2="0"  y2="-14" transform="rotate(120)"/>
+        <line x1="0" y1="-28" x2="0"  y2="-14" transform="rotate(150)"/>
+        <line x1="0" y1="-28" x2="0"  y2="-14" transform="rotate(180)"/>
+        <line x1="0" y1="-28" x2="0"  y2="-14" transform="rotate(210)"/>
+        <line x1="0" y1="-28" x2="0"  y2="-14" transform="rotate(240)"/>
+        <line x1="0" y1="-28" x2="0"  y2="-14" transform="rotate(270)"/>
+        <line x1="0" y1="-28" x2="0"  y2="-14" transform="rotate(300)"/>
+        <line x1="0" y1="-28" x2="0"  y2="-14" transform="rotate(330)"/>
+      </g>
+      <!-- sun circle -->
+      <circle cx="130" cy="30" r="10" fill="#FFD700" opacity=".85"/>
+      <!-- horizontal lines either side -->
+      <line x1="0" y1="30" x2="108" y2="30" stroke="#D4A843" stroke-width="1" opacity=".35"/>
+      <line x1="152" y1="30" x2="260" y2="30" stroke="#D4A843" stroke-width="1" opacity=".35"/>
+    </svg>
+  </div>
+
+  <!-- ====== READING CARDS ====== -->
+  <div class="readings-grid">
+
+    <!-- OT Card -->
+    <div class="card ot-card">
+      <div class="card-watermark">📜</div>
+      <div class="card-label">📖 Old Testament</div>
+      <div class="passage-title" id="ot-title">Loading…</div>
+      <div class="passage-ref"  id="ot-ref"></div>
+      <div class="card-rule"></div>
+      <div class="verse-text"  id="ot-text">
+        <div class="loader">
+          <span>Reading</span>
+          <div class="dots">
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NT Card -->
+    <div class="card nt-card">
+      <div class="card-watermark">✝️</div>
+      <div class="card-label">✝️ New Testament</div>
+      <div class="passage-title" id="nt-title">Loading…</div>
+      <div class="passage-ref"  id="nt-ref"></div>
+      <div class="card-rule"></div>
+      <div class="verse-text"  id="nt-text">
+        <div class="loader">
+          <span>Reading</span>
+          <div class="dots">
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /readings-grid -->
+
+  <!-- ====== REFLECTION ====== -->
+  <div class="reflection">
+    <h3>💭 Think About It</h3>
+    <p id="reflection-q">Loading reflection…</p>
+  </div>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <p>📖 King James Version &nbsp;·&nbsp; New readings every day &nbsp;·&nbsp; Made with <span class="footer-heart">♥</span> for God's glory</p>
+</footer>
+
+<!-- ========================================================
+     SCRIPT
+======================================================== -->
+<script>
+/* ============================================================
+   PASSAGE LISTS
+============================================================ */
+const OT = [
+  { title:"In the Beginning",           ref:"Genesis 1:1-10",          api:"genesis+1:1-10" },
+  { title:"God Creates Humans",          ref:"Genesis 1:24-31",         api:"genesis+1:24-31" },
+  { title:"The Garden of Eden",          ref:"Genesis 2:7-17",          api:"genesis+2:7-17" },
+  { title:"The Fall",                    ref:"Genesis 3:1-13",          api:"genesis+3:1-13" },
+  { title:"God Speaks to Noah",          ref:"Genesis 6:9-22",          api:"genesis+6:9-22" },
+  { title:"The Rainbow Promise",         ref:"Genesis 9:8-17",          api:"genesis+9:8-17" },
+  { title:"God Calls Abraham",           ref:"Genesis 12:1-9",          api:"genesis+12:1-9" },
+  { title:"Abraham and Isaac",           ref:"Genesis 22:1-14",         api:"genesis+22:1-14" },
+  { title:"Jacob's Ladder",             ref:"Genesis 28:10-19",        api:"genesis+28:10-19" },
+  { title:"Joseph's Dreams",            ref:"Genesis 37:1-11",         api:"genesis+37:1-11" },
+  { title:"Joseph Forgives His Brothers",ref:"Genesis 50:15-21",        api:"genesis+50:15-21" },
+  { title:"The Burning Bush",            ref:"Exodus 3:1-14",           api:"exodus+3:1-14" },
+  { title:"The Ten Plagues Begin",       ref:"Exodus 7:14-21",          api:"exodus+7:14-21" },
+  { title:"The Passover",               ref:"Exodus 12:21-28",         api:"exodus+12:21-28" },
+  { title:"The Red Sea Parts",           ref:"Exodus 14:13-22",         api:"exodus+14:13-22" },
+  { title:"The Ten Commandments",        ref:"Exodus 20:1-17",          api:"exodus+20:1-17" },
+  { title:"Love the Lord Your God",      ref:"Deuteronomy 6:4-12",      api:"deuteronomy+6:4-12" },
+  { title:"Be Strong and Courageous",   ref:"Joshua 1:1-9",            api:"joshua+1:1-9" },
+  { title:"Gideon's Calling",           ref:"Judges 6:11-18",          api:"judges+6:11-18" },
+  { title:"Ruth's Loyalty",             ref:"Ruth 1:14-22",            api:"ruth+1:14-22" },
+  { title:"God Looks at the Heart",     ref:"1 Samuel 16:6-13",        api:"1+samuel+16:6-13" },
+  { title:"David and Goliath",          ref:"1 Samuel 17:40-51",       api:"1+samuel+17:40-51" },
+  { title:"Elijah on Mount Carmel",     ref:"1 Kings 18:36-40",        api:"1+kings+18:36-40" },
+  { title:"Naaman Is Healed",           ref:"2 Kings 5:9-15",          api:"2+kings+5:9-15" },
+  { title:"For Such a Time as This",    ref:"Esther 4:12-17",          api:"esther+4:12-17" },
+  { title:"God Answers Job",            ref:"Job 38:1-13",             api:"job+38:1-13" },
+  { title:"The Way of the Righteous",   ref:"Psalm 1:1-6",             api:"psalm+1:1-6" },
+  { title:"The Heavens Declare His Glory",ref:"Psalm 19:1-10",         api:"psalm+19:1-10" },
+  { title:"The Lord Is My Shepherd",    ref:"Psalm 23:1-6",            api:"psalm+23:1-6" },
+  { title:"The Lord Is My Light",       ref:"Psalm 27:1-8",            api:"psalm+27:1-8" },
+  { title:"God Is Our Refuge",          ref:"Psalm 46:1-7",            api:"psalm+46:1-7" },
+  { title:"A Prayer of Forgiveness",    ref:"Psalm 51:1-12",           api:"psalm+51:1-12" },
+  { title:"God's Protection",           ref:"Psalm 91:1-12",           api:"psalm+91:1-12" },
+  { title:"Enter His Courts with Praise",ref:"Psalm 100:1-5",          api:"psalm+100:1-5" },
+  { title:"Praise the Lord, O My Soul", ref:"Psalm 103:1-13",          api:"psalm+103:1-13" },
+{ title:"My Help Comes from the Lord",ref:"Psalm 121:1-8",           api:"psalm+121:1-8" },
+  { title:"God Knows Me Completely",    ref:"Psalm 139:1-12",          api:"psalm+139:1-12" },
+  { title:"Praise the Lord!",           ref:"Psalm 150:1-6",           api:"psalm+150:1-6" },
+  { title:"The Beginning of Wisdom",    ref:"Proverbs 1:1-9",          api:"proverbs+1:1-9" },
+  { title:"Trust in the Lord",          ref:"Proverbs 3:1-12",         api:"proverbs+3:1-12" },
+  { title:"Get Wisdom",                 ref:"Proverbs 4:1-13",         api:"proverbs+4:1-13" },
+  { title:"Commit Your Plans to God",   ref:"Proverbs 16:1-9",         api:"proverbs+16:1-9" },
+  { title:"A Time for Everything",      ref:"Ecclesiastes 3:1-11",     api:"ecclesiastes+3:1-11" },
+  { title:"Isaiah's Vision of God",     ref:"Isaiah 6:1-8",            api:"isaiah+6:1-8" },
+  { title:"The Prince of Peace",        ref:"Isaiah 9:2-7",            api:"isaiah+9:2-7" },
+  { title:"Soar on Wings Like Eagles",  ref:"Isaiah 40:28-31",         api:"isaiah+40:28-31" },
+  { title:"Fear Not, I Am with You",    ref:"Isaiah 43:1-7",           api:"isaiah+43:1-7" },
+  { title:"The Suffering Servant",      ref:"Isaiah 53:1-9",           api:"isaiah+53:1-9" },
+  { title:"Plans to Prosper You",       ref:"Jeremiah 29:11-14",       api:"jeremiah+29:11-14" },
+  { title:"Great Is Thy Faithfulness",  ref:"Lamentations 3:22-26",    api:"lamentations+3:22-26" },
+  { title:"The Valley of Dry Bones",    ref:"Ezekiel 37:1-10",         api:"ezekiel+37:1-10" },
+  { title:"The Fiery Furnace",          ref:"Daniel 3:14-25",          api:"daniel+3:14-25" },
+  { title:"Daniel in the Lions' Den",  ref:"Daniel 6:16-23",          api:"daniel+6:16-23" },
+  { title:"Jonah Runs from God",        ref:"Jonah 1:1-10",            api:"jonah+1:1-10" },
+  { title:"Jonah's Prayer",            ref:"Jonah 2:1-9",             api:"jonah+2:1-9" },
+  { title:"What Does the Lord Require?",ref:"Micah 6:6-8",             api:"micah+6:6-8" },
+  { title:"God Rejoices Over You",      ref:"Zephaniah 3:14-17",       api:"zephaniah+3:14-17" },
+  { title:"Delight in the Lord",        ref:"Psalm 37:1-9",            api:"psalm+37:1-9" },
+  { title:"The Priestly Blessing",      ref:"Numbers 6:22-26",         api:"numbers+6:22-26" },
+  { title:"If My People Pray",          ref:"2 Chronicles 7:13-16",    api:"2+chronicles+7:13-16" },
+];
+
+const NT = [
+  { title:"The Beatitudes",             ref:"Matthew 5:1-12",          api:"matthew+5:1-12" },
+  { title:"Salt and Light",             ref:"Matthew 5:13-16",         api:"matthew+5:13-16" },
+  { title:"The Lord's Prayer",         ref:"Matthew 6:9-15",          api:"matthew+6:9-15" },
+  { title:"Do Not Worry",              ref:"Matthew 6:25-34",         api:"matthew+6:25-34" },
+  { title:"Ask, Seek, Knock",           ref:"Matthew 7:7-14",          api:"matthew+7:7-14" },
+  { title:"Jesus Feeds 5,000",         ref:"Matthew 14:15-21",        api:"matthew+14:15-21" },
+  { title:"Jesus Walks on Water",       ref:"Matthew 14:22-33",        api:"matthew+14:22-33" },
+  { title:"Who Is the Greatest?",       ref:"Matthew 18:1-5",          api:"matthew+18:1-5" },
+  { title:"Come to Me",                ref:"Matthew 11:28-30",        api:"matthew+11:28-30" },
+  { title:"The Great Commission",       ref:"Matthew 28:16-20",        api:"matthew+28:16-20" },
+  { title:"Jesus Calls His Disciples",  ref:"Mark 1:16-20",            api:"mark+1:16-20" },
+  { title:"Jesus Calms the Storm",      ref:"Mark 4:35-41",            api:"mark+4:35-41" },
+  { title:"Jesus and the Children",     ref:"Mark 10:13-16",           api:"mark+10:13-16" },
+  { title:"He Is Risen!",              ref:"Mark 16:1-8",             api:"mark+16:1-8" },
+  { title:"The Angel Visits Mary",      ref:"Luke 1:26-38",            api:"luke+1:26-38" },
+  { title:"The Birth of Jesus",         ref:"Luke 2:1-12",             api:"luke+2:1-12" },
+  { title:"The Boy Jesus at the Temple",ref:"Luke 2:41-52",            api:"luke+2:41-52" },
+  { title:"The Good Samaritan",         ref:"Luke 10:25-37",           api:"luke+10:25-37" },
+  { title:"The Prodigal Son",           ref:"Luke 15:11-24",           api:"luke+15:11-24" },
+  { title:"Zacchaeus",                  ref:"Luke 19:1-10",            api:"luke+19:1-10" },
+  { title:"Love Your Enemies",          ref:"Luke 6:27-36",            api:"luke+6:27-36" },
+  { title:"In the Beginning Was the Word",ref:"John 1:1-14",           api:"john+1:1-14" },
+  { title:"For God So Loved the World", ref:"John 3:1-16",             api:"john+3:1-16" },
+  { title:"The Bread of Life",          ref:"John 6:35-40",            api:"john+6:35-40" },
+  { title:"The Good Shepherd",          ref:"John 10:1-11",            api:"john+10:1-11" },
+  { title:"I Am the Resurrection",      ref:"John 11:23-27",           api:"john+11:23-27" },
+  { title:"I Am the Way",              ref:"John 14:1-6",             api:"john+14:1-6" },
+  { title:"The True Vine",             ref:"John 15:1-11",            api:"john+15:1-11" },
+  { title:"Love One Another",           ref:"John 15:12-17",           api:"john+15:12-17" },
+  { title:"Doubting Thomas",            ref:"John 20:24-29",           api:"john+20:24-29" },
+  { title:"The Truth Will Set You Free",ref:"John 8:31-36",            api:"john+8:31-36" },
+  { title:"The Day of Pentecost",       ref:"Acts 2:1-12",             api:"acts+2:1-12" },
+  { title:"Paul Meets Jesus",           ref:"Acts 9:1-9",              api:"acts+9:1-9" },
+  { title:"Paul in Prison",             ref:"Acts 16:25-34",           api:"acts+16:25-34" },
+  { title:"All Have Sinned",            ref:"Romans 3:21-26",          api:"romans+3:21-26" },
+  { title:"God's Love for Us",         ref:"Romans 5:1-8",            api:"romans+5:1-8" },
+  { title:"More Than Conquerors",       ref:"Romans 8:28-39",          api:"romans+8:28-39" },
+  { title:"Living the Christian Life",  ref:"Romans 12:9-21",          api:"romans+12:9-21" },
+  { title:"The Greatest Is Love",       ref:"1 Corinthians 13:1-13",   api:"1+corinthians+13:1-13" },
+  { title:"Jars of Clay",              ref:"2 Corinthians 4:7-18",    api:"2+corinthians+4:7-18" },
+  { title:"The Fruit of the Spirit",    ref:"Galatians 5:22-26",       api:"galatians+5:22-26" },
+  { title:"Saved by Grace",             ref:"Ephesians 2:1-10",        api:"ephesians+2:1-10" },
+  { title:"The Armor of God",           ref:"Ephesians 6:10-18",       api:"ephesians+6:10-18" },
+  { title:"I Can Do All Things",        ref:"Philippians 4:4-13",      api:"philippians+4:4-13" },
+  { title:"Put On Love",               ref:"Colossians 3:12-17",      api:"colossians+3:12-17" },
+  { title:"Rejoice Always",             ref:"1 Thessalonians 5:16-24", api:"1+thessalonians+5:16-24" },
+  { title:"Scripture Is God-Breathed",  ref:"2 Timothy 3:14-17",       api:"2+timothy+3:14-17" },
+  { title:"The Definition of Faith",    ref:"Hebrews 11:1-6",          api:"hebrews+11:1-6" },
+  { title:"Run the Race",              ref:"Hebrews 12:1-3",          api:"hebrews+12:1-3" },
+  { title:"Count It All Joy",           ref:"James 1:2-8",             api:"james+1:2-8" },
+  { title:"Be Doers of the Word",       ref:"James 1:22-27",           api:"james+1:22-27" },
+  { title:"Cast Your Anxiety on Him",   ref:"1 Peter 5:6-11",          api:"1+peter+5:6-11" },
+  { title:"Walking in the Light",       ref:"1 John 1:5-10",           api:"1+john+1:5-10" },
+  { title:"God Is Love",               ref:"1 John 4:7-12",           api:"1+john+4:7-12" },
+  { title:"A New Heaven and Earth",     ref:"Revelation 21:1-7",       api:"revelation+21:1-7" },
+  { title:"I Stand at the Door",        ref:"Revelation 3:20-22",      api:"revelation+3:20-22" },
+  { title:"Dead to Sin, Alive in Christ",ref:"Romans 6:1-11",          api:"romans+6:1-11" },
+];
+
+/* ============================================================
+   REFLECTION QUESTIONS (rotate daily)
+============================================================ */
+const REFLECTIONS = [
+  "What does today's Old Testament story teach you about how God keeps His promises? How does the New Testament reading show that same promise fulfilled?",
+  "Think about a character from today's Old Testament reading. What challenge did they face, and how did God help them? Can you think of a time God helped you with something hard?",
+  "Today's New Testament passage shows us something about Jesus. What one word would you use to describe what you learned about Him today?",
+  "The Old Testament reading happened thousands of years ago — but does it still feel relevant to your life? What part stood out to you most, and why?",
+  "Jesus often said things that surprised people. Does anything in today's New Testament reading surprise you? What does it make you want to do differently?",
+  "Today's readings have a theme in common. Can you find it? Write it down and think about how it applies to your life this week.",
+  "If the person in today's Old Testament story were your friend, what advice would you give them? What would you tell them about God based on what you read?",
+  "Is there a verse from today's readings you want to memorize? Say it out loud three times and ask God to help it stick in your heart.",
+  "How does today's Old Testament passage point forward to Jesus? What connection do you see between the two readings?",
+  "God has different ways of speaking to people in the Bible — through dreams, angels, burning bushes, and still small voices. How has God spoken to your heart lately?",
+  "What does today's New Testament reading say about how to treat other people? Is there someone in your life you could love better this week?",
+  "Today's Old Testament passage shows us something about who God is. List three things you learned about God's character from today's reading.",
+  "The Bible says God's Word is 'a lamp to our feet.' After reading today, what is one step God might be asking you to take?",
+  "What emotions do you notice in the characters in today's readings — fear, joy, doubt, hope? Have you ever felt those same emotions in your relationship with God?",
+  "Is there something in today's New Testament reading that seems hard or impossible to live out? Ask God to help you take one small step toward it.",
+];
+
+/* ============================================================
+   SEEDED RANDOM (consistent all day, changes each day)
+============================================================ */
+function dayIndex() {
+  const today = new Date();
+  const epoch = new Date(2024, 0, 1);
+  return Math.floor((today - epoch) / 86400000);
+}
+
+function seedRand(seed) {
+  const x = Math.sin(seed + 7919) * 10000;
+  return x - Math.floor(x);
+}
+
+/* ============================================================
+   FETCH ONE PASSAGE FROM bible-api.com
+============================================================ */
+async function fetchPassage(apiRef, elId) {
+  const el = document.getElementById(elId);
+  try {
+    const res = await fetch(`https://bible-api.com/${apiRef}?translation=kjv`);
+    if (!res.ok) throw new Error('Network error');
+    const data = await res.json();
+
+    if (data.verses && data.verses.length) {
+      let html = '';
+      data.verses.forEach(v => {
+        html += `<sup class="v-num">${v.verse}</sup>${v.text.trim()} `;
+      });
+      el.innerHTML = html;
+    } else if (data.text) {
+      el.textContent = data.text;
+    } else {
+      throw new Error('No text returned');
+    }
+  } catch(e) {
+    el.innerHTML = `<div class="err-msg">⚠️ Could not load this passage. Please check your internet connection and refresh the page.</div>`;
+  }
+}
+
+/* ============================================================
+   HEADER STARS
+============================================================ */
+function buildStars() {
+  const wrap = document.getElementById('hdr-stars');
+  for (let i = 0; i < 70; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random() * 3 + 1;
+    Object.assign(s.style, {
+      width:  sz + 'px',
+      height: sz + 'px',
+      left: Math.random() * 100 + '%',
+      top:  Math.random() * 100 + '%',
+      animationDuration: (Math.random() * 3 + 2) + 's',
+      animationDelay:    (Math.random() * 4) + 's',
+    });
+    wrap.appendChild(s);
+  }
+}
+
+/* ============================================================
+   FLOATING PARTICLES
+============================================================ */
+function buildParticles() {
+  const wrap = document.getElementById('particles-wrap');
+  for (let i = 0; i < 24; i++) {
+    const p = document.createElement('div');
+    p.className = 'ptcl';
+    const sz = Math.random() * 7 + 3;
+    Object.assign(p.style, {
+      left:              Math.random() * 100 + '%',
+      width:             sz + 'px',
+      height:            sz + 'px',
+      animationDuration: (Math.random() * 22 + 14) + 's',
+      animationDelay:    (Math.random() * 12) + 's',
+    });
+    wrap.appendChild(p);
+  }
+}
+
+/* ============================================================
+   MAIN INIT
+============================================================ */
+async function init() {
+  /* Date pill */
+  const now = new Date();
+  document.getElementById('date-pill').textContent = now.toLocaleDateString('en-US', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+
+  const day = dayIndex();
+
+  /* Pick passages */
+  const otIdx  = Math.floor(seedRand(day)       * OT.length);
+  const ntIdx  = Math.floor(seedRand(day + 200) * NT.length);
+  const refIdx = Math.floor(seedRand(day + 400) * REFLECTIONS.length);
+
+  const ot = OT[otIdx];
+  const nt = NT[ntIdx];
+
+  /* Fill in titles / references immediately */
+  document.getElementById('ot-title').textContent = ot.title;
+  document.getElementById('ot-ref').textContent   = ot.ref;
+  document.getElementById('nt-title').textContent = nt.title;
+  document.getElementById('nt-ref').textContent   = nt.ref;
+  document.getElementById('reflection-q').textContent = REFLECTIONS[refIdx];
+
+  /* Fetch both passages in parallel */
+  await Promise.all([
+    fetchPassage(ot.api, 'ot-text'),
+    fetchPassage(nt.api, 'nt-text'),
+  ]);
+}
+
+/* ============================================================
+   KICK OFF
+============================================================ */
+buildStars();
+buildParticles();
+init();
+</script>
+</body>
+</html>
+
