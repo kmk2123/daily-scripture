@@ -466,6 +466,12 @@
     .ot-simple-card .card-rule{background:linear-gradient(to right,#34D399,transparent);}
     .nt-simple-card .card-rule{background:linear-gradient(to right,#A855F7,transparent);}
     .ot-simple-card .dot{background:#34D399;}.nt-simple-card .dot{background:#A855F7;}
+  
+    /* === EQUAL-HEIGHT CARDS + ILLUSTRATIONS === */
+    .card { display:flex; flex-direction:column; }
+    .verse-text { flex:1; }
+    .card-illustration { padding-top:1.1rem; width:100%; }
+    .card-illustration svg { width:100%; height:auto; display:block; }
     </style>
 </head>
 <body>
@@ -546,6 +552,28 @@
           </div>
         </div>
       </div>
+      <div class="card-illustration">
+        <svg viewBox="0 0 280 72" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="otSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgba(212,168,67,0.04)"/>
+              <stop offset="100%" stop-color="rgba(212,168,67,0.16)"/>
+            </linearGradient>
+          </defs>
+          <rect width="280" height="72" fill="url(#otSky)" rx="6"/>
+          <circle cx="140" cy="30" r="14" fill="rgba(212,168,67,0.16)" stroke="rgba(212,168,67,0.42)" stroke-width="1.5"/>
+          <circle cx="140" cy="30" r="7" fill="rgba(212,168,67,0.28)"/>
+          <g stroke="rgba(212,168,67,0.36)" stroke-width="1.2" stroke-linecap="round">
+            <line x1="140" y1="10" x2="140" y2="6"/><line x1="140" y1="50" x2="140" y2="54"/>
+            <line x1="120" y1="30" x2="116" y2="30"/><line x1="160" y1="30" x2="164" y2="30"/>
+            <line x1="127" y1="17" x2="124" y2="14"/><line x1="153" y1="17" x2="156" y2="14"/>
+            <line x1="127" y1="43" x2="124" y2="46"/><line x1="153" y1="43" x2="156" y2="46"/>
+          </g>
+          <path d="M0 72 L28 46 L55 57 L90 34 L120 52 L140 43 L160 52 L190 34 L225 57 L252 46 L280 72 Z"
+                fill="rgba(107,68,0,0.09)" stroke="rgba(212,168,67,0.28)" stroke-width="1" stroke-linejoin="round"/>
+          <line x1="0" y1="65" x2="280" y2="65" stroke="rgba(212,168,67,0.2)" stroke-width="1" stroke-dasharray="4,7"/>
+        </svg>
+      </div>
     </div>
 
     <!-- NT Card -->
@@ -562,6 +590,36 @@
             <div class="dot"></div><div class="dot"></div><div class="dot"></div>
           </div>
         </div>
+      </div>
+      <div class="card-illustration">
+        <svg viewBox="0 0 280 72" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="ntGlow" cx="50%" cy="85%" r="65%">
+              <stop offset="0%" stop-color="rgba(99,102,241,0.2)"/>
+              <stop offset="100%" stop-color="rgba(99,102,241,0)"/>
+            </radialGradient>
+            <linearGradient id="ntSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgba(99,102,241,0.02)"/>
+              <stop offset="100%" stop-color="rgba(99,102,241,0.1)"/>
+            </linearGradient>
+          </defs>
+          <rect width="280" height="72" fill="url(#ntSky)" rx="6"/>
+          <ellipse cx="140" cy="75" rx="140" ry="40" fill="url(#ntGlow)"/>
+          <g stroke="rgba(99,102,241,0.13)" stroke-width="1" stroke-linecap="round">
+            <line x1="140" y1="6" x2="98" y2="72"/><line x1="140" y1="6" x2="119" y2="72"/>
+            <line x1="140" y1="6" x2="140" y2="72"/><line x1="140" y1="6" x2="161" y2="72"/>
+            <line x1="140" y1="6" x2="182" y2="72"/>
+          </g>
+          <line x1="140" y1="8" x2="140" y2="62" stroke="rgba(99,102,241,0.52)" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="115" y1="26" x2="165" y2="26" stroke="rgba(99,102,241,0.52)" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="140" cy="26" r="6" fill="rgba(99,102,241,0.11)"/>
+          <circle cx="54" cy="19" r="1.5" fill="rgba(99,102,241,0.26)"/>
+          <circle cx="78" cy="11" r="1" fill="rgba(99,102,241,0.2)"/>
+          <circle cx="226" cy="19" r="1.5" fill="rgba(99,102,241,0.26)"/>
+          <circle cx="202" cy="11" r="1" fill="rgba(99,102,241,0.2)"/>
+          <circle cx="34" cy="40" r="1" fill="rgba(99,102,241,0.16)"/>
+          <circle cx="246" cy="40" r="1" fill="rgba(99,102,241,0.16)"/>
+        </svg>
       </div>
     </div>
 
