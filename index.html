@@ -451,7 +451,22 @@
       width: 260px;
       height: 60px;
     }
-  </style>
+
+    /* === SIMPLIFIED READING CARDS === */
+    .simplified-intro{text-align:center;padding:2rem 1rem .5rem;max-width:780px;margin:0 auto;}
+    .simplified-intro h2{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--warm-brown);margin-bottom:.35rem;}
+    .simplified-intro p{font-family:'Nunito',sans-serif;font-size:.9rem;color:var(--text-med);opacity:.75;}
+    .ot-simple-card{background:linear-gradient(135deg,#fff 0%,#f0fff4 100%);border:2px solid rgba(52,211,153,.25);}
+    .ot-simple-card::before{background:#34D399;}.ot-simple-card::after{background:#059669;}
+    .nt-simple-card{background:linear-gradient(135deg,#fff 0%,#fdf4ff 100%);border:2px solid rgba(168,85,247,.25);}
+    .nt-simple-card::before{background:#A855F7;}.nt-simple-card::after{background:#7C3AED;}
+    .ot-simple-card .card-label{background:rgba(52,211,153,.15);color:#065f46;}
+    .nt-simple-card .card-label{background:rgba(168,85,247,.15);color:#6b21a8;}
+    .ot-simple-card .passage-title{color:#065f46;}.nt-simple-card .passage-title{color:#6b21a8;}
+    .ot-simple-card .card-rule{background:linear-gradient(to right,#34D399,transparent);}
+    .nt-simple-card .card-rule{background:linear-gradient(to right,#A855F7,transparent);}
+    .ot-simple-card .dot{background:#34D399;}.nt-simple-card .dot{background:#A855F7;}
+    </style>
 </head>
 <body>
 
@@ -551,6 +566,32 @@
     </div>
 
   </div><!-- /readings-grid -->
+
+
+  <!-- ====== SIMPLIFIED READINGS ====== -->
+  <div class="simplified-intro">
+    <h2>✨ Same Passage, Simpler Words</h2>
+    <p>The same readings above in plain, everyday language — great for younger readers</p>
+  </div>
+
+  <div class="readings-grid">
+    <div class="card ot-simple-card">
+      <div class="card-watermark">📜</div>
+      <div class="card-label">📖 Old Testament — Easy Read</div>
+      <div class="passage-title" id="ot-simple-title">Loading…</div>
+      <div class="passage-ref" id="ot-simple-ref"></div>
+      <div class="card-rule"></div>
+      <div class="verse-text" id="ot-simple-text"><div class="loader"><span>Reading</span><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div></div>
+    </div>
+    <div class="card nt-simple-card">
+      <div class="card-watermark">✝️</div>
+      <div class="card-label">✝️ New Testament — Easy Read</div>
+      <div class="passage-title" id="nt-simple-title">Loading…</div>
+      <div class="passage-ref" id="nt-simple-ref"></div>
+      <div class="card-rule"></div>
+      <div class="verse-text" id="nt-simple-text"><div class="loader"><span>Reading</span><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div></div>
+    </div>
+  </div>
 
   <!-- ====== REFLECTION ====== -->
   <div class="reflection">
@@ -733,10 +774,10 @@ function seedRand(seed) {
 /* ============================================================
    FETCH ONE PASSAGE FROM bible-api.com
 ============================================================ */
-async function fetchPassage(apiRef, elId) {
+async function fetchPassage(apiRef, elId, translation) {
   const el = document.getElementById(elId);
   try {
-    const res = await fetch(`https://bible-api.com/${apiRef}?translation=kjv`);
+    const res = await fetch(`https://bible-api.com/${apiRef}?translation=${translation || 'kjv'}`);
     if (!res.ok) throw new Error('Network error');
     const data = await res.json();
 
@@ -824,10 +865,17 @@ async function init() {
   document.getElementById('nt-ref').textContent   = nt.ref;
   document.getElementById('reflection-q').textContent = REFLECTIONS[refIdx];
 
+  document.getElementById('ot-simple-title').textContent = ot.title;
+  document.getElementById('ot-simple-ref').textContent   = ot.ref;
+  document.getElementById('nt-simple-title').textContent = nt.title;
+  document.getElementById('nt-simple-ref').textContent   = nt.ref;
+
   /* Fetch both passages in parallel */
   await Promise.all([
     fetchPassage(ot.api, 'ot-text'),
     fetchPassage(nt.api, 'nt-text'),
+    fetchPassage(ot.api, 'ot-simple-text', 'bbe'),
+    fetchPassage(nt.api, 'nt-simple-text', 'bbe'),
   ]);
 }
 
