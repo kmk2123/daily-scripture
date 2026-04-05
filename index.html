@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daily Scripture â God's Word for Today</title>
+  <title>Daily Scripture — God's Word for Today</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;600;700;800&display=swap"
     rel="stylesheet"
@@ -387,7 +387,7 @@
       animation: riseIn .8s ease 1s forwards;
     }
     .reflection::before {
-      content: 'ð­';
+      content: '💭';
       position: absolute;
       font-size: 10rem;
       top: -20px; right: -10px;
@@ -462,11 +462,11 @@
 <header>
   <div class="hdr-glow"></div>
   <div id="hdr-stars"></div>
-  <div class="hdr-cross">â</div>
-  <div class="crown-row">â¦ â¦ â¦</div>
+  <div class="hdr-cross">✝</div>
+  <div class="crown-row">✦ ✦ ✦</div>
   <h1>Daily Scripture</h1>
-  <p class="hdr-subtitle">God's Word â Fresh Every Morning</p>
-  <div class="date-pill" id="date-pill">Loading dateâ¦</div>
+  <p class="hdr-subtitle">God's Word — Fresh Every Morning</p>
+  <div class="date-pill" id="date-pill">Loading date…</div>
 </header>
 
 <!-- ========== WAVE ========== -->
@@ -484,7 +484,7 @@
 
   <!-- Intro quote -->
   <div class="intro-quote">
-    <span>"Thy word is a lamp unto my feet, and a light unto my path." â Psalm 119:105</span>
+    <span>"Thy word is a lamp unto my feet, and a light unto my path." — Psalm 119:105  ·  Mama says that’s some HIGH-QUALITY Scripture right there!</span>
   </div>
 
   <!-- Illustrated separator (sun-ray SVG) -->
@@ -518,9 +518,9 @@
 
     <!-- OT Card -->
     <div class="card ot-card">
-      <div class="card-watermark">ð</div>
-      <div class="card-label">ð Old Testament</div>
-      <div class="passage-title" id="ot-title">Loadingâ¦</div>
+      <div class="card-watermark">📜</div>
+      <div class="card-label">📖 Old Testament — That’s the OLD Old Stuff!</div>
+      <div class="passage-title" id="ot-title">Loading…</div>
       <div class="passage-ref"  id="ot-ref"></div>
       <div class="card-rule"></div>
       <div class="verse-text"  id="ot-text">
@@ -535,9 +535,9 @@
 
     <!-- NT Card -->
     <div class="card nt-card">
-      <div class="card-watermark">âï¸</div>
-      <div class="card-label">âï¸ New Testament</div>
-      <div class="passage-title" id="nt-title">Loadingâ¦</div>
+      <div class="card-watermark">✝️</div>
+      <div class="card-label">✝️ New Testament — Now This Here’s the Good Stuff!</div>
+      <div class="passage-title" id="nt-title">Loading…</div>
       <div class="passage-ref"  id="nt-ref"></div>
       <div class="card-rule"></div>
       <div class="verse-text"  id="nt-text">
@@ -554,15 +554,15 @@
 
   <!-- ====== REFLECTION ====== -->
   <div class="reflection">
-    <h3>ð­ Think About It</h3>
-    <p id="reflection-q">Loading reflectionâ¦</p>
+    <h3>🏈 Bobby Says Think On It</h3>
+    <p id="reflection-q">Loading reflection…</p>
   </div>
 
 </main>
 
 <!-- ========== FOOTER ========== -->
 <footer>
-  <p>ð King James Version &nbsp;Â·&nbsp; New readin’s every single day &nbsp;Â·&nbsp; Made with <span class="footer-heart">â¥</span> for God's glory</p>
+  <p>📖 King James Version &nbsp;·&nbsp; New readin’s every single day &nbsp;·&nbsp; Made with <span class="footer-heart">♥</span> for God's glory</p>
 </footer>
 
 <!-- ========================================================
@@ -751,7 +751,7 @@ async function fetchPassage(apiRef, elId) {
       throw new Error('No text returned');
     }
   } catch(e) {
-    el.innerHTML = `<div class="err-msg">â ï¸ Mama says the internet is bein’ real ornery right now. Please check your connection and try again — YOU CAN DO IT!</div>`;
+    el.innerHTML = `<div class="err-msg">⚠️ Mama says the internet is bein’ real ornery right now. Please check your connection and try again — YOU CAN DO IT!</div>`;
   }
 }
 
