@@ -456,22 +456,28 @@
     .simplified-intro{text-align:center;padding:2rem 1rem .5rem;max-width:780px;margin:0 auto;}
     .simplified-intro h2{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--warm-brown);margin-bottom:.35rem;}
     .simplified-intro p{font-family:'Nunito',sans-serif;font-size:.9rem;color:var(--text-med);opacity:.75;}
-    .ot-simple-card{background:linear-gradient(135deg,#fff 0%,#f0fff4 100%);border:2px solid rgba(52,211,153,.25);}
-    .ot-simple-card::before{background:#34D399;}.ot-simple-card::after{background:#059669;}
-    .nt-simple-card{background:linear-gradient(135deg,#fff 0%,#fdf4ff 100%);border:2px solid rgba(168,85,247,.25);}
-    .nt-simple-card::before{background:#A855F7;}.nt-simple-card::after{background:#7C3AED;}
-    .ot-simple-card .card-label{background:rgba(52,211,153,.15);color:#065f46;}
-    .nt-simple-card .card-label{background:rgba(168,85,247,.15);color:#6b21a8;}
-    .ot-simple-card .passage-title{color:#065f46;}.nt-simple-card .passage-title{color:#6b21a8;}
-    .ot-simple-card .card-rule{background:linear-gradient(to right,#34D399,transparent);}
-    .nt-simple-card .card-rule{background:linear-gradient(to right,#A855F7,transparent);}
-    .ot-simple-card .dot{background:#34D399;}.nt-simple-card .dot{background:#A855F7;}
+    .ot-reflect-card{background:linear-gradient(135deg,#fff 0%,#f0fff4 100%);border:2px solid rgba(52,211,153,.25);}
+    .ot-reflect-card::before{background:#34D399;}.ot-reflect-card::after{background:#059669;}
+    .nt-reflect-card{background:linear-gradient(135deg,#fff 0%,#fdf4ff 100%);border:2px solid rgba(168,85,247,.25);}
+    .nt-reflect-card::before{background:#A855F7;}.nt-reflect-card::after{background:#7C3AED;}
+    .ot-reflect-card .card-label{background:rgba(52,211,153,.15);color:#065f46;}
+    .nt-reflect-card .card-label{background:rgba(168,85,247,.15);color:#6b21a8;}
+    .ot-reflect-card .passage-title{color:#065f46;}.nt-reflect-card .passage-title{color:#6b21a8;}
+    .ot-reflect-card .card-rule{background:linear-gradient(to right,#34D399,transparent);}
+    .nt-reflect-card .card-rule{background:linear-gradient(to right,#A855F7,transparent);}
+    .ot-reflect-card .dot{background:#34D399;}.nt-reflect-card .dot{background:#A855F7;}
   
     /* === EQUAL-HEIGHT CARDS + ILLUSTRATIONS === */
     .card { display:flex; flex-direction:column; height:500px; }
     .verse-text { flex:1; overflow-y:auto; min-height:0; }
     .card-illustration { padding-top:1rem; width:100%; flex-shrink:0; }
     .card-illustration svg { width:100%; height:auto; display:block; }
+    .reflect-section-label{font-size:.67rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.5;margin:.85rem 0 .35rem;}
+    .reflect-meaning p{font-size:.91rem;line-height:1.72;color:#374151;margin:0;}
+    .reflect-apply ul{margin:.35rem 0 0;padding:0;list-style:none;}
+    .reflect-apply li{font-size:.88rem;line-height:1.55;color:#374151;padding:.38rem 0 .38rem 1.35rem;border-bottom:1px solid rgba(0,0,0,.07);position:relative;}
+    .reflect-apply li:last-child{border-bottom:none;}
+    .reflect-apply li::before{content:"\2192";position:absolute;left:0;opacity:.45;font-weight:700;}
     </style>
 </head>
 <body>
@@ -628,27 +634,27 @@
 
   <!-- ====== SIMPLIFIED READINGS ====== -->
   <div class="simplified-intro">
-    <h2>✨ Same Passage, Simpler Words</h2>
-    <p>The same readings above in plain, everyday language — great for younger readers</p>
+    <h2>💡 Reflect &amp; Apply</h2>
+    <p>What each passage means — and how to bring it into your own life today</p>
   </div>
 
   <div class="readings-grid">
-    <div class="card ot-simple-card">
+    <div class="card ot-reflect-card">
       <div class="card-watermark">📜</div>
-      <div class="card-label">📖 Old Testament — Easy Read</div>
-      <div class="passage-title" id="ot-simple-title">Loading…</div>
-      <div class="passage-ref" id="ot-simple-ref"></div>
+      <div class="card-label">📜 Old Testament — Reflection</div>
+      <div class="passage-title" id="ot-reflect-title">Loading…</div>
       <div class="card-rule"></div>
-      <div class="verse-text" id="ot-simple-text"><div class="loader"><span>Reading</span><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div></div>
+      <div class="reflect-meaning"><div class="reflect-section-label">What It Means</div><p id="ot-reflect-text">Loading…</p></div>
+      <div class="reflect-apply"><div class="reflect-section-label">Apply It Today</div><ul id="ot-apply-list"><li>Loading…</li></ul></div>
       <div class="card-illustration"><svg viewBox="0 0 280 72" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="sg" cx="50%" cy="100%" r="80%"><stop offset="0%" stop-color="rgba(212,168,67,.18)"/><stop offset="100%" stop-color="rgba(212,168,67,0)"/></radialGradient></defs><rect width="280" height="72" fill="url(#sg)"/><line x1="0" y1="52" x2="280" y2="52" stroke="rgba(212,168,67,.25)" stroke-width="1" stroke-dasharray="4,4"/><circle cx="140" cy="56" r="16" fill="rgba(212,168,67,.55)"/><g stroke="rgba(212,168,67,.5)" stroke-width="1.5" stroke-linecap="round"><line x1="140" y1="34" x2="140" y2="28"/><line x1="158" y1="39" x2="162" y2="35"/><line x1="164" y1="56" x2="170" y2="56"/><line x1="158" y1="73" x2="162" y2="77"/><line x1="122" y1="39" x2="118" y2="35"/><line x1="116" y1="56" x2="110" y2="56"/></g><path d="M0,72 Q40,40 70,52 Q100,62 120,50 Q150,35 180,48 Q210,58 240,46 Q260,38 280,44 L280,72 Z" fill="rgba(212,168,67,.22)"/></svg></div>
     </div>
-    <div class="card nt-simple-card">
+    <div class="card nt-reflect-card">
       <div class="card-watermark">✝️</div>
-      <div class="card-label">✝️ New Testament — Easy Read</div>
-      <div class="passage-title" id="nt-simple-title">Loading…</div>
-      <div class="passage-ref" id="nt-simple-ref"></div>
+      <div class="card-label">✝️ New Testament — Reflection</div>
+      <div class="passage-title" id="nt-reflect-title">Loading…</div>
       <div class="card-rule"></div>
-      <div class="verse-text" id="nt-simple-text"><div class="loader"><span>Reading</span><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div></div>
+      <div class="reflect-meaning"><div class="reflect-section-label">What It Means</div><p id="nt-reflect-text">Loading…</p></div>
+      <div class="reflect-apply"><div class="reflect-section-label">Apply It Today</div><ul id="nt-apply-list"><li>Loading…</li></ul></div>
       <div class="card-illustration"><svg viewBox="0 0 280 72" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="ng" cx="50%" cy="80%" r="70%"><stop offset="0%" stop-color="rgba(99,102,241,.2)"/><stop offset="100%" stop-color="rgba(99,102,241,0)"/></radialGradient></defs><rect width="280" height="72" fill="url(#ng)"/><g stroke="rgba(99,102,241,.18)" stroke-width="1" stroke-linecap="round"><line x1="140" y1="0" x2="140" y2="72"/><line x1="60" y1="36" x2="220" y2="36"/><line x1="100" y1="5" x2="180" y2="67"/><line x1="180" y1="5" x2="100" y2="67"/></g><line x1="140" y1="12" x2="140" y2="68" stroke="rgba(99,102,241,.65)" stroke-width="3" stroke-linecap="round"/><line x1="118" y1="30" x2="162" y2="30" stroke="rgba(99,102,241,.65)" stroke-width="3" stroke-linecap="round"/><circle cx="140" cy="36" r="6" fill="rgba(99,102,241,.15)" stroke="rgba(99,102,241,.4)" stroke-width="1"/><circle cx="80" cy="16" r="2" fill="rgba(99,102,241,.35)"/><circle cx="200" cy="56" r="2" fill="rgba(99,102,241,.35)"/><circle cx="60" cy="58" r="1.5" fill="rgba(99,102,241,.25)"/><circle cx="220" cy="18" r="1.5" fill="rgba(99,102,241,.25)"/></svg></div>
     </div>
   </div>
@@ -901,6 +907,50 @@ function buildParticles() {
 /* ============================================================
    MAIN INIT
 ============================================================ */
+
+function generateReflection(ref, verseText) {
+  var t = (verseText || "").toLowerCase();
+  var themes = [];
+  if (/faith|trust|believ/.test(t)) themes.push("faith");
+  if (/love|mercy|compassion|kindness/.test(t)) themes.push("love");
+  if (/fear|afraid|courage/.test(t)) themes.push("courage");
+  if (/pray/.test(t)) themes.push("prayer");
+  if (/forgiv/.test(t)) themes.push("forgiveness");
+  if (/hope|patient/.test(t)) themes.push("hope");
+  if (/obey|command/.test(t)) themes.push("obedience");
+  if (/peace|rest/.test(t)) themes.push("peace");
+  if (/strength|power|might/.test(t)) themes.push("strength");
+  if (/wisdom|understand/.test(t)) themes.push("wisdom");
+  var theme = themes[0] || "faithfulness";
+  var M = {
+    faith:"This passage calls us to trust in God even when circumstances feel uncertain. Faith is not about having all the answers—it is about holding on to the One who does.",
+    love:"This passage reveals the depth of God's love and invites us to reflect that love in our relationships. Genuine love—the kind described here—is selfless, patient, and transformative.",
+    courage:"This scripture speaks to the fears that hold us back and God's steady response: do not be afraid. Courage is not the absence of fear but acting despite it, anchored in God's presence.",
+    prayer:"This passage opens a window into honest communication with God. Prayer is more than ritual—it is the lifeline through which we access His strength, wisdom, and comfort each day.",
+    forgiveness:"Forgiveness is one of Scripture's most counter-cultural themes. To forgive is to release others—and ourselves—from bitterness, and to walk in the freedom God intends.",
+    hope:"When life feels heavy, this passage anchors us in the certainty that God's purposes will prevail. Biblical hope is not wishful thinking—it is confident expectation rooted in who God is.",
+    obedience:"This passage shows why following God's Word matters—not as a burden, but as a pathway to a full life. Obedience is the natural response of a heart that has truly encountered God.",
+    peace:"This passage points to a peace that transcends circumstances—one that comes not from perfect situations, but from a settled trust in God's sovereignty over every area of life.",
+    strength:"This scripture reminds us that our greatest strength is not our own ability, but God's power working in and through us. It is an invitation to stop striving alone and lean on Him.",
+    wisdom:"True wisdom begins with God—not just knowledge, but a way of seeing and living that reflects His perspective on what truly matters in this life and beyond.",
+    faithfulness:"This passage offers a timeless truth about God's character and His relationship with us. Rooted in ancient wisdom, it speaks with remarkable freshness to the questions we face today."
+  };
+  var A = {
+    faith:["What area of your life requires you to trust God more deeply right now?","Is there a decision you have been hesitating on because you are relying on your own understanding?","How can you take one concrete step of faith this week?"],
+    love:["Who in your life might need to experience God's love through you today?","Is there a relationship where you are being called to love more sacrificially?","How does knowing you are deeply loved by God change how you see yourself and others?"],
+    courage:["What fear is keeping you from a step you know God is calling you toward?","How might remembering God's presence change how you face your biggest challenge right now?","Is there someone who needs your encouragement to take their own courageous step?"],
+    prayer:["Is there a burden you have been carrying that needs to be brought honestly before God?","How might setting aside focused time for prayer change the tone of your day this week?","What would it look like to approach God with greater openness and trust?"],
+    forgiveness:["Is there someone—or even yourself—that you need to extend forgiveness to?","How might holding onto unforgiveness be affecting your peace and your relationships?","What would one step toward reconciliation look like in a relationship that needs healing?"],
+    hope:["What situation in your life most needs the anchor of biblical hope right now?","How can you encourage someone around you who is struggling to hold on?","What promise from God can you hold tightly to when discouragement comes this week?"],
+    obedience:["Is there an area where you know what God is asking but have been hesitating to follow through?","What might change if you more consistently aligned your choices with God's Word?","How can you build habits that make obedience feel more natural and joyful?"],
+    peace:["What worries or anxieties do you need to surrender to God today?","How can you cultivate more of God's peace in your daily routines and relationships?","Is there someone around you who needs the peace you have found in God?"],
+    strength:["Where are you trying to push through in your own strength instead of leaning on God?","What does it look like practically to draw on God's strength today?","How can you encourage someone who is feeling worn down or overwhelmed right now?"],
+    wisdom:["What decision are you facing where you need God's wisdom more than your own analysis?","How are you currently making space to hear from God through His Word and prayer?","Is there a trusted, wise voice in your life you could seek counsel from this week?"],
+    faithfulness:["How does this passage speak to a situation you are currently navigating?","What one truth from this scripture can you carry with you through today?","Who could you share this passage with, and what conversation might it spark?"]
+  };
+  return { meaning: M[theme], apply: A[theme] };
+}
+
 async function init() {
   /* Date pill */
   const now = new Date();
@@ -925,18 +975,20 @@ async function init() {
   document.getElementById('nt-ref').textContent   = nt.ref;
   document.getElementById('reflection-q').textContent = REFLECTIONS[refIdx];
 
-  document.getElementById('ot-simple-title').textContent = ot.title;
-  document.getElementById('ot-simple-ref').textContent   = ot.ref;
-  document.getElementById('nt-simple-title').textContent = nt.title;
-  document.getElementById('nt-simple-ref').textContent   = nt.ref;
+  document.getElementById('ot-reflect-title').textContent = ot.title;
+  document.getElementById('nt-reflect-title').textContent = nt.title;
 
-  /* Fetch both passages in parallel */
+  /* Fetch passages then generate reflections */
   await Promise.all([
     fetchPassage(ot.api, 'ot-text'),
     fetchPassage(nt.api, 'nt-text'),
-    fetchPassage(ot.api, 'ot-simple-text', 'bbe'),
-    fetchPassage(nt.api, 'nt-simple-text', 'bbe'),
   ]);
+  var otR = generateReflection(ot.ref, document.getElementById('ot-text').innerText);
+  var ntR = generateReflection(nt.ref, document.getElementById('nt-text').innerText);
+  document.getElementById('ot-reflect-text').textContent = otR.meaning;
+  document.getElementById('nt-reflect-text').textContent = ntR.meaning;
+  document.getElementById('ot-apply-list').innerHTML = otR.apply.map(function(a){return '<li>'+a+'</li>';}).join('');
+  document.getElementById('nt-apply-list').innerHTML = ntR.apply.map(function(a){return '<li>'+a+'</li>';}).join('');
 }
 
 /* ============================================================
