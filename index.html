@@ -25,15 +25,18 @@
       --indigo:      #312E81;
       --text-dark:   #2C1810;
       --text-med:    #4A3728;
+      --bg-gradient: radial-gradient(ellipse at 18% 18%, #FFF3E0 0%, #FDEAC8 50%, #F0D9B5 100%);
+      --body-font:   'Lora', serif;
     }
 
     /* ============================================================
        BODY
     ============================================================ */
     body {
-      background: radial-gradient(ellipse at 18% 18%, #FFF3E0 0%, #FDEAC8 50%, #F0D9B5 100%);
+      background: var(--bg-gradient);
       min-height: 100vh;
-      font-family: 'Lora', serif;
+      font-family: var(--body-font);
+      transition: background 0.4s ease, color 0.3s ease;
       color: var(--text-dark);
       overflow-x: hidden;
     }
@@ -478,6 +481,75 @@
     .reflect-apply li{font-size:.88rem;line-height:1.55;color:#374151;padding:.38rem 0 .38rem 1.35rem;border-bottom:1px solid rgba(0,0,0,.07);position:relative;}
     .reflect-apply li:last-child{border-bottom:none;}
     .reflect-apply li::before{content:"\2192";position:absolute;left:0;opacity:.45;font-weight:700;}
+    
+    /* ====== THEME: NIGHT ====== */
+    body.theme-night{--bg-gradient:radial-gradient(ellipse at 18% 18%,#0f172a 0%,#1a2744 50%,#0f172a 100%);--text-dark:#e2e8f0;--text-med:#94a3b8;}
+    body.theme-night .card{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%) !important;border-color:rgba(255,255,255,.08) !important;box-shadow:0 12px 44px rgba(0,0,0,.4) !important;}
+    body.theme-night .verse-text,body.theme-night .reflect-meaning p,body.theme-night .reflect-apply li{color:#cbd5e1;}
+    body.theme-night .passage-title{color:#f1f5f9 !important;}
+    body.theme-night .passage-ref{color:#94a3b8 !important;}
+    body.theme-night .card-label{color:#94a3b8 !important;background:rgba(255,255,255,.07) !important;}
+    body.theme-night .reflect-section-label{color:#64748b;}
+    body.theme-night .reflect-apply li{border-bottom-color:rgba(255,255,255,.08);}
+    body.theme-night .simplified-intro h2,body.theme-night .section-intro h2{color:#f1f5f9;}
+    body.theme-night .simplified-intro p,body.theme-night .section-intro p{color:#94a3b8;}
+    body.theme-night header{background:linear-gradient(180deg,#0f172a 0%,#1a2744 100%);}
+
+    /* ====== THEME: SAGE ====== */
+    body.theme-sage{--bg-gradient:radial-gradient(ellipse at 18% 18%,#ecfdf5 0%,#d1fae5 50%,#a7f3d0 100%);--text-dark:#064e3b;--text-med:#065f46;}
+    body.theme-sage .card{background:linear-gradient(135deg,#fff 0%,#f0fdf4 100%) !important;}
+
+    /* ====== THEME: AZURE ====== */
+    body.theme-azure{--bg-gradient:radial-gradient(ellipse at 18% 18%,#eff6ff 0%,#dbeafe 50%,#bfdbfe 100%);--text-dark:#1e3a5f;--text-med:#1e40af;}
+    body.theme-azure .card{background:linear-gradient(135deg,#fff 0%,#eff6ff 100%) !important;}
+
+    /* ====== FONT STYLES ====== */
+    body.font-sans{--body-font:'Nunito',sans-serif;}
+    body.font-mono{--body-font:'Courier New',Courier,monospace;}
+
+    /* ====== FONT SIZES ====== */
+    body.size-small .verse-text,body.size-small .reflect-meaning p,body.size-small .reflect-apply li{font-size:.82rem;}
+    body.size-small .passage-title{font-size:1.05rem !important;}
+    body.size-large .verse-text,body.size-large .reflect-meaning p,body.size-large .reflect-apply li{font-size:1.08rem;}
+    body.size-large .passage-title{font-size:1.45rem !important;}
+
+    /* ====== SETTINGS FAB ====== */
+    .settings-fab{position:fixed;bottom:28px;right:28px;width:52px;height:52px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--gold) 0%,#b8860b 100%);color:#fff;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.22);z-index:900;display:flex;align-items:center;justify-content:center;transition:transform 0.2s ease,box-shadow 0.2s ease;}
+    .settings-fab:hover{transform:scale(1.1) rotate(22deg);box-shadow:0 6px 28px rgba(0,0,0,.3);}
+
+    /* ====== SETTINGS OVERLAY ====== */
+    .settings-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity 0.3s ease;z-index:1000;}
+    .settings-overlay.open{opacity:1;pointer-events:all;}
+
+    /* ====== SETTINGS PANEL ====== */
+    .settings-panel{position:fixed;top:0;right:0;width:300px;max-width:90vw;height:100%;background:#fffdf7;box-shadow:-6px 0 40px rgba(0,0,0,.18);transform:translateX(100%);transition:transform 0.35s cubic-bezier(.4,0,.2,1);z-index:1100;display:flex;flex-direction:column;font-family:var(--body-font);}
+    .settings-panel.open{transform:translateX(0);}
+    body.theme-night .settings-panel{background:#1e293b;color:#e2e8f0;}
+
+    .settings-panel-header{display:flex;align-items:center;justify-content:space-between;padding:22px 22px 16px;border-bottom:1px solid rgba(0,0,0,.08);}
+    body.theme-night .settings-panel-header{border-color:rgba(255,255,255,.1);}
+    .settings-panel-title{font-size:1.05rem;font-weight:700;color:var(--text-dark);letter-spacing:.01em;}
+
+    .settings-close-btn{width:30px;height:30px;border-radius:50%;border:none;background:rgba(0,0,0,.07);cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;color:var(--text-dark);transition:background 0.2s;}
+    .settings-close-btn:hover{background:rgba(0,0,0,.14);}
+    body.theme-night .settings-close-btn{background:rgba(255,255,255,.1);color:#e2e8f0;}
+
+    .settings-body{padding:18px 22px;overflow-y:auto;flex:1;}
+    .settings-group{margin-bottom:26px;}
+    .settings-group-label{font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-med);margin-bottom:10px;}
+
+    .settings-opts{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+    .settings-opts.cols-3{grid-template-columns:repeat(3,1fr);}
+
+    .sopt{padding:10px 6px;border:2px solid rgba(0,0,0,.1);border-radius:10px;background:rgba(255,255,255,.6);cursor:pointer;font-size:.82rem;font-weight:600;color:var(--text-dark);text-align:center;transition:all 0.2s ease;font-family:inherit;line-height:1.3;}
+    .sopt:hover{border-color:var(--gold);background:rgba(212,168,67,.1);}
+    .sopt.active{border-color:var(--gold);background:linear-gradient(135deg,rgba(212,168,67,.2) 0%,rgba(212,168,67,.08) 100%);color:var(--warm-brown);}
+    body.theme-night .sopt{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.12);color:#e2e8f0;}
+    body.theme-night .sopt.active{background:rgba(212,168,67,.2);color:#FFD700;border-color:var(--gold);}
+
+    .sopt-emoji{display:block;font-size:1.1rem;margin-bottom:2px;}
+    .settings-footer{padding:14px 22px;border-top:1px solid rgba(0,0,0,.08);font-size:.72rem;color:var(--text-med);text-align:center;}
+    body.theme-night .settings-footer{border-color:rgba(255,255,255,.1);}
     </style>
 </head>
 <body>
@@ -998,6 +1070,114 @@ buildStars();
 buildParticles();
 init();
 </script>
+
+<!-- ========== SETTINGS ========== -->
+<button class="settings-fab" id="settingsBtn" aria-label="Open settings">⚙️</button>
+
+<div class="settings-overlay" id="settingsOverlay"></div>
+
+<div class="settings-panel" id="settingsPanel" role="dialog" aria-label="Site settings">
+  <div class="settings-panel-header">
+    <span class="settings-panel-title">⚙️ Customize</span>
+    <button class="settings-close-btn" id="settingsClose" aria-label="Close settings">✕</button>
+  </div>
+  <div class="settings-body">
+
+    <div class="settings-group">
+      <div class="settings-group-label">Theme</div>
+      <div class="settings-opts" id="themeOpts">
+        <button class="sopt active" data-theme="dawn"><span class="sopt-emoji">☀️</span>Dawn</button>
+        <button class="sopt" data-theme="night"><span class="sopt-emoji">🌙</span>Night</button>
+        <button class="sopt" data-theme="sage"><span class="sopt-emoji">🌿</span>Sage</button>
+        <button class="sopt" data-theme="azure"><span class="sopt-emoji">💙</span>Azure</button>
+      </div>
+    </div>
+
+    <div class="settings-group">
+      <div class="settings-group-label">Font Size</div>
+      <div class="settings-opts cols-3" id="sizeOpts">
+        <button class="sopt" data-size="small">Small</button>
+        <button class="sopt active" data-size="medium">Medium</button>
+        <button class="sopt" data-size="large">Large</button>
+      </div>
+    </div>
+
+    <div class="settings-group">
+      <div class="settings-group-label">Font Style</div>
+      <div class="settings-opts cols-3" id="fontOpts">
+        <button class="sopt active" data-font="serif"><span class="sopt-emoji">📖</span>Serif</button>
+        <button class="sopt" data-font="sans"><span class="sopt-emoji">🔤</span>Sans</button>
+        <button class="sopt" data-font="mono"><span class="sopt-emoji">💻</span>Mono</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="settings-footer">Preferences saved automatically</div>
+</div>
+
+<!-- ========== SETTINGS JS ========== -->
+<script>
+(function() {
+  var prefs = {};
+  try { prefs = JSON.parse(localStorage.getItem('dsPrefs') || '{}'); } catch(e) {}
+  var theme = prefs.theme || 'dawn';
+  var size  = prefs.size  || 'medium';
+  var font  = prefs.font  || 'serif';
+
+  var THEMES = ['dawn','night','sage','azure'];
+  var SIZES  = ['small','medium','large'];
+  var FONTS  = ['serif','sans','mono'];
+
+  function applyAll() {
+    var b = document.body;
+    THEMES.forEach(function(t){ b.classList.remove('theme-'+t); });
+    SIZES.forEach(function(s){ b.classList.remove('size-'+s); });
+    FONTS.forEach(function(f){ b.classList.remove('font-'+f); });
+    if (theme !== 'dawn')   b.classList.add('theme-'+theme);
+    if (size  !== 'medium') b.classList.add('size-'+size);
+    if (font  !== 'serif')  b.classList.add('font-'+font);
+    syncButtons();
+  }
+
+  function syncButtons() {
+    var all = document.querySelectorAll('[data-theme],[data-size],[data-font]');
+    all.forEach(function(btn) {
+      var active = (btn.dataset.theme && btn.dataset.theme === theme) ||
+                   (btn.dataset.size  && btn.dataset.size  === size)  ||
+                   (btn.dataset.font  && btn.dataset.font  === font);
+      btn.classList.toggle('active', active);
+    });
+  }
+
+  function save() {
+    try { localStorage.setItem('dsPrefs', JSON.stringify({theme:theme,size:size,font:font})); } catch(e) {}
+  }
+
+  function openPanel()  { document.getElementById('settingsPanel').classList.add('open'); document.getElementById('settingsOverlay').classList.add('open'); }
+  function closePanel() { document.getElementById('settingsPanel').classList.remove('open'); document.getElementById('settingsOverlay').classList.remove('open'); }
+
+  document.getElementById('settingsBtn').addEventListener('click', openPanel);
+  document.getElementById('settingsClose').addEventListener('click', closePanel);
+  document.getElementById('settingsOverlay').addEventListener('click', closePanel);
+
+  document.getElementById('themeOpts').addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-theme]'); if (!btn) return;
+    theme = btn.dataset.theme; applyAll(); save();
+  });
+  document.getElementById('sizeOpts').addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-size]'); if (!btn) return;
+    size = btn.dataset.size; applyAll(); save();
+  });
+  document.getElementById('fontOpts').addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-font]'); if (!btn) return;
+    font = btn.dataset.font; applyAll(); save();
+  });
+
+  // Apply saved prefs on load
+  applyAll();
+})();
+</script>
+
 </body>
 </html>
 
