@@ -550,6 +550,132 @@
     .sopt-emoji{display:block;font-size:1.1rem;margin-bottom:2px;}
     .settings-footer{padding:14px 22px;border-top:1px solid rgba(0,0,0,.08);font-size:.72rem;color:var(--text-med);text-align:center;}
     body.theme-night .settings-footer{border-color:rgba(255,255,255,.1);}
+    
+    /* ====== SUPPORT / DONATION SECTION ====== */
+    .support-section {
+      max-width: 680px;
+      margin: 0 auto 56px;
+      padding: 0 20px;
+      text-align: center;
+    }
+    .support-card {
+      background: linear-gradient(135deg, #fffdf4 0%, #fff8e7 100%);
+      border: 1.5px solid rgba(212,168,67,.3);
+      border-radius: 28px;
+      padding: 44px 36px 38px;
+      box-shadow: 0 8px 36px rgba(212,168,67,.12);
+      position: relative;
+      overflow: hidden;
+    }
+    .support-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold), #b8860b, var(--gold));
+    }
+    body.theme-night .support-card {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border-color: rgba(212,168,67,.2);
+    }
+    .support-icon {
+      font-size: 2.6rem;
+      display: block;
+      margin-bottom: 14px;
+      animation: gently-pulse 3s ease-in-out infinite;
+    }
+    @keyframes gently-pulse {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.08); }
+    }
+    .support-title {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin: 0 0 12px;
+      letter-spacing: -.01em;
+    }
+    .support-subtitle {
+      font-size: .95rem;
+      line-height: 1.7;
+      color: var(--text-med);
+      margin: 0 0 28px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .support-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .kofi-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 13px 28px;
+      background: linear-gradient(135deg, #FF5E5B 0%, #e04040 100%);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 18px rgba(255,94,91,.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-family: var(--body-font);
+    }
+    .kofi-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 24px rgba(255,94,91,.45);
+    }
+    .kofi-btn img { width: 22px; height: 22px; }
+    .member-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 13px 28px;
+      background: transparent;
+      color: var(--warm-brown);
+      border: 2px solid var(--gold);
+      border-radius: 50px;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      font-family: var(--body-font);
+    }
+    .member-btn:hover {
+      background: rgba(212,168,67,.1);
+      transform: translateY(-2px);
+    }
+    body.theme-night .member-btn { color: #FFD700; }
+    .support-note {
+      margin-top: 20px;
+      font-size: .77rem;
+      color: var(--text-med);
+      opacity: .75;
+    }
+    .support-tiers {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 26px;
+      flex-wrap: wrap;
+    }
+    .tier-pill {
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: .78rem;
+      font-weight: 600;
+      background: rgba(212,168,67,.1);
+      border: 1px solid rgba(212,168,67,.25);
+      color: var(--warm-brown);
+    }
+    body.theme-night .tier-pill { color: #FFD700; background: rgba(212,168,67,.12); }
     </style>
 </head>
 <body>
@@ -740,6 +866,40 @@
 </main>
 
 <!-- ========== FOOTER ========== -->
+
+<!-- ========== SUPPORT / DONATION ========== -->
+<section class="support-section">
+  <div class="support-card">
+    <span class="support-icon">☕</span>
+    <h2 class="support-title">Keep This Ministry Free</h2>
+    <p class="support-subtitle">
+      Daily Scripture is completely free — no ads, no paywalls, no tracking.
+      If it has brought you peace, comfort, or a moment with God today,
+      consider supporting it with a small gift.
+    </p>
+    <div class="support-buttons">
+      <a class="kofi-btn"
+         href="https://ko-fi.com/YOUR_USERNAME"
+         target="_blank" rel="noopener"
+         id="kofiDonateBtn">
+        ☕ Buy Us a Coffee
+      </a>
+      <a class="member-btn"
+         href="https://ko-fi.com/YOUR_USERNAME/tiers"
+         target="_blank" rel="noopener"
+         id="kofiMemberBtn">
+        ✦ Become a Member
+      </a>
+    </div>
+    <div class="support-tiers">
+      <span class="tier-pill">☕ One-time gift</span>
+      <span class="tier-pill">🌟 Monthly supporter</span>
+      <span class="tier-pill">✝️ Ministry partner</span>
+    </div>
+    <p class="support-note">Every contribution — large or small — helps this site stay online and ad-free.</p>
+  </div>
+</section>
+
 <footer>
   <p>📖 King James Version &nbsp;·&nbsp; New readings every day &nbsp;·&nbsp; Made with <span class="footer-heart">♥</span> for God's glory</p>
 </footer>
