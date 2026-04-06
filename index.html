@@ -27,6 +27,7 @@
       --text-med:    #4A3728;
       --bg-gradient: radial-gradient(ellipse at 18% 18%, #FFF3E0 0%, #FDEAC8 50%, #F0D9B5 100%);
       --body-font:   'Lora', serif;
+    --hl-color:    #FFD700;
     }
 
     /* ============================================================
@@ -679,19 +680,92 @@
     
     /* ====== STREAK BADGE ====== */
     .streak-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      background: linear-gradient(135deg, rgba(255,120,0,.15), rgba(255,80,0,.08));
-      border: 1.5px solid rgba(255,100,0,.3);
+      position: fixed; top: 20px; right: 20px; z-index: 800;
+      display: flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, #ff7800, #dc3c00);
       border-radius: 50px;
-      padding: 5px 14px;
-      font-size: .8rem; font-weight: 700;
-      color: #c2410c;
-      margin-top: 10px;
+      padding: 8px 18px;
+      font-size: .82rem; font-weight: 700;
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(255,100,0,.45);
+      cursor: pointer;
       animation: riseIn .6s ease forwards;
+      transition: transform .15s;
     }
+    .streak-badge:hover { transform: scale(1.06); }
+    /* Streak popup overlay */
+    .streak-popup-overlay {
+      position: fixed; inset: 0; z-index: 900;
+      background: rgba(0,0,0,.55); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      animation: fadeIn .3s ease;
+    }
+    .streak-popup {
+      background: linear-gradient(160deg, #fff8ee 0%, #fff3e0 100%);
+      border-radius: 20px;
+      padding: 40px 44px;
+      max-width: 360px; width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+      animation: riseIn .4s ease;
+      position: relative;
+    }
+    .streak-popup .sp-flame { font-size: 3.5rem; line-height:1; }
+    .streak-popup .sp-count { font-size: 3rem; font-weight: 900; color: #dc3c00; line-height:1.1; }
+    .streak-popup .sp-label { font-size: 1.1rem; color: #6b4400; margin: 6px 0 18px; font-style:italic; }
+    .streak-popup .sp-msg   { font-size: .95rem; color: #4a3728; margin-bottom: 24px; line-height:1.55; }
+    .streak-popup .sp-close {
+      background: linear-gradient(135deg, #ff7800, #dc3c00);
+      color: #fff; border: none; border-radius: 50px;
+      padding: 10px 32px; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: transform .15s;
+    }
+    .streak-popup .sp-close:hover { transform: scale(1.05); }
     body.theme-night .streak-badge { color: #fb923c; background: rgba(255,120,0,.12); border-color: rgba(255,120,0,.25); }
 
     /* ====== CARD ACTION BUTTONS ====== */
+    /* Copy bar */
+    .card-copy-bar {
+      padding: .5rem 1rem;
+      border-top: 1px solid rgba(0,0,0,.07);
+      flex-shrink: 0;
+    }
+    .copy-icon-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(212,168,67,.12);
+      border: 1.5px solid rgba(212,168,67,.35);
+      border-radius: 50px;
+      padding: 6px 18px;
+      font-size: .82rem; font-weight: 600;
+      color: var(--warm-brown);
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .copy-icon-btn:hover { background: rgba(212,168,67,.25); transform: scale(1.04); }
+    .copy-icon-btn.copied { background: rgba(50,180,80,.15); border-color: rgba(50,180,80,.4); color: #166534; }
+    /* Highlight wrapper */
+    .verse-hl-wrap { position: relative; }
+    .hl-btn {
+      position: absolute; right: -36px; top: 4px;
+      width: 28px; height: 28px;
+      background: rgba(212,168,67,.15);
+      border: 1.5px solid rgba(212,168,67,.35);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; cursor: pointer;
+      transition: background .2s, transform .15s;
+      z-index: 5;
+    }
+    .hl-btn:hover { background: rgba(212,168,67,.35); transform: scale(1.1); }
+    /* Highlight color swatches in settings */
+    .hl-color-row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+    .hl-swatch {
+      width: 26px; height: 26px; border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer; transition: transform .15s, border-color .15s;
+    }
+    .hl-swatch:hover { transform: scale(1.15); }
+    .hl-swatch.active { border-color: var(--text-dark); transform: scale(1.15); }
     .card-actions {
       display: flex; gap: 8px;
       padding: .6rem 0 .2rem;
@@ -737,10 +811,26 @@
     }
     .verse-line:hover { background: rgba(212,168,67,.12); }
     .verse-highlighted {
-      background: rgba(212,168,67,.28) !important;
+      background: var(--hl-color, #FFD700) !important;
       border-left: 3px solid var(--gold);
       padding-left: 8px;
+      opacity: 0.85;
     }
+    /* Highlight mode active indicator */
+    .verse-text.hl-mode-on { cursor: crosshair; }
+    .hl-toggle-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(212,168,67,.12);
+      border: 1.5px dashed rgba(212,168,67,.5);
+      border-radius: 50px;
+      padding: 4px 12px;
+      font-size: .75rem; font-weight: 600;
+      color: var(--warm-brown);
+      cursor: pointer;
+      margin-bottom: 6px;
+      transition: background .2s;
+    }
+    .hl-toggle-btn:hover, .hl-toggle-btn.active { background: rgba(212,168,67,.3); border-style: solid; }
     body.theme-night .verse-line:hover { background: rgba(212,168,67,.08); }
     body.theme-night .verse-highlighted { background: rgba(212,168,67,.18) !important; }
 
@@ -790,8 +880,19 @@
   <h1>Daily Scripture</h1>
   <p class="hdr-subtitle">God's Word — Fresh Every Morning</p>
   <div class="date-pill" id="date-pill">Loading date…</div>
-  <div class="streak-badge" id="streakBadge" style="display:none">🔥 <span id="streakCount">1</span>-day streak</div>
+  <div class="streak-badge" id="streakBadge" style="display:none" onclick="document.getElementById('streakPopup').style.display='flex'">🔥 <span id="streakCount">1</span>-day streak</div>
 </header>
+
+<!-- Streak popup (shown on each day-2+ visit) -->
+<div class="streak-popup-overlay" id="streakPopup" style="display:none" onclick="if(event.target===this)closeStreakPopup()">
+  <div class="streak-popup">
+    <div class="sp-flame">🔥</div>
+    <div class="sp-count" id="spCount">1</div>
+    <div class="sp-label">Day Streak!</div>
+    <p class="sp-msg" id="spMsg">You're on fire! Keep coming back to God's Word every day — your consistency is building something beautiful.</p>
+    <button class="sp-close" onclick="closeStreakPopup()">Keep It Going →</button>
+  </div>
+</div>
 
 <!-- ========== WAVE ========== -->
 <div class="wave">
@@ -855,6 +956,7 @@
           </div>
         </div>
       </div>
+      <div class="card-copy-bar"><button class="copy-icon-btn" onclick="copyCard('ot-title','ot-ref','ot-text')" title="Copy verse">📋 Copy verse</button></div>
       <div class="card-illustration">
         <svg viewBox="0 0 280 72" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
@@ -894,6 +996,7 @@
           </div>
         </div>
       </div>
+      <div class="card-copy-bar"><button class="copy-icon-btn" onclick="copyCard('nt-title','nt-ref','nt-text')" title="Copy verse">📋 Copy verse</button></div>
       <div class="card-illustration">
         <svg viewBox="0 0 280 72" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
@@ -1386,6 +1489,16 @@ init();
     </div>
 
   </div>
+  <div class="settings-group">
+    <div class="settings-label">🎨 Highlight Color</div>
+    <div class="hl-color-row" id="hlColorOpts">
+      <div class="hl-swatch active" data-hl="#FFD700" style="background:#FFD700" title="Gold"></div>
+      <div class="hl-swatch" data-hl="#90EE90" style="background:#90EE90" title="Green"></div>
+      <div class="hl-swatch" data-hl="#ADD8E6" style="background:#ADD8E6" title="Blue"></div>
+      <div class="hl-swatch" data-hl="#FFB6C1" style="background:#FFB6C1" title="Pink"></div>
+      <div class="hl-swatch" data-hl="#E6CCFF" style="background:#E6CCFF" title="Purple"></div>
+    </div>
+  </div>
   <div class="settings-footer">Preferences saved automatically</div>
 </div>
 
@@ -1396,7 +1509,9 @@ init();
   try { prefs = JSON.parse(localStorage.getItem('dsPrefs') || '{}'); } catch(e) {}
   var theme = prefs.theme || 'dawn';
   var size  = prefs.size  || 'medium';
-  var font  = prefs.font  || 'serif';
+  var font    = prefs.font    || 'serif';
+  var hlColor = prefs.hlColor || '#FFD700';
+  document.documentElement.style.setProperty('--hl-color', hlColor);
 
   var THEMES = ['dawn','night','sage','azure'];
   var SIZES  = ['small','medium','large'];
@@ -1424,7 +1539,7 @@ init();
   }
 
   function save() {
-    try { localStorage.setItem('dsPrefs', JSON.stringify({theme:theme,size:size,font:font})); } catch(e) {}
+    try { localStorage.setItem('dsPrefs', JSON.stringify({theme:theme,size:size,font:font,hlColor:hlColor})); } catch(e) {}
   }
 
   function openPanel()  { document.getElementById('settingsPanel').classList.add('open'); document.getElementById('settingsOverlay').classList.add('open'); }
@@ -1445,6 +1560,20 @@ init();
   document.getElementById('fontOpts').addEventListener('click', function(e) {
     var btn = e.target.closest('[data-font]'); if (!btn) return;
     font = btn.dataset.font; applyAll(); save();
+  });
+
+  // Highlight color swatches
+  document.getElementById('hlColorOpts').addEventListener('click', function(e) {
+    var sw = e.target.closest('.hl-swatch'); if (!sw) return;
+    hlColor = sw.dataset.hl;
+    document.documentElement.style.setProperty('--hl-color', hlColor);
+    document.querySelectorAll('.hl-swatch').forEach(function(s){ s.classList.remove('active'); });
+    sw.classList.add('active');
+    save();
+  });
+  // Mark active swatch on load
+  document.querySelectorAll('.hl-swatch').forEach(function(s){
+    s.classList.toggle('active', s.dataset.hl === hlColor);
   });
 
   // Apply saved prefs on load
@@ -1476,22 +1605,31 @@ init();
 /* ----- PRAYER GENERATOR ----- */
 function generatePrayer(theme) {
   var P = {
-    faith:"Lord, strengthen my faith today. When doubt rises and the path feels unclear, remind me that You hold all things in Your hands. Help me to trust not in what I can see, but in who You are. Amen.",
-    love:"Father, fill me with Your love today — a love that is patient, generous, and unconditional. Where I have fallen short in loving others, forgive me and renew my heart. May those around me see You in how I love. Amen.",
-    courage:"God, You have not given me a spirit of fear, but of power and love. Grant me courage to face what lies ahead, knowing that You go before me. I will not be afraid. Amen.",
-    prayer:"Heavenly Father, thank You that I can come to You just as I am. Teach me to pray with greater faith and honesty. Help me to seek You not just in moments of need, but every morning as my first thought. Amen.",
-    forgiveness:"Lord, as You have forgiven me, help me to forgive others. Release me from the weight of bitterness and resentment. Soften my heart where it has grown hard, and restore what has been broken. Amen.",
-    hope:"Father, when the world feels uncertain, You are my anchor. Renew my hope today — not hope in circumstances, but in Your unchanging character and unfailing promises. Amen.",
-    obedience:"Lord, I surrender my will to Yours today. Where I have been walking my own path, draw me back. Give me a heart that delights in Your Word and the strength to live it out faithfully. Amen.",
-    peace:"Prince of Peace, quiet the noise and anxiety in my heart. Let Your peace that passes all understanding guard my mind and soul today. Help me to rest in the truth that You are in control. Amen.",
-    strength:"Father, my strength runs out — but Yours does not. Renew me today. Where I am weary, be my energy. Where I am weak, be my power. In my dependence on You, let Your glory shine. Amen.",
-    wisdom:"Lord, grant me wisdom today — not just knowledge, but discernment to know what truly matters and humility to seek Your guidance in every decision. Let my choices reflect Your heart. Amen.",
-    faithfulness:"Gracious God, thank You for the gift of Your Word — living, active, and powerful. As I carry today's passage with me, let it take root in my heart and bear fruit in my life. To Your glory, Amen."
+    faith: "Heavenly Father, I come before You today with a heart that is learning — sometimes trembling, sometimes doubting, but always reaching toward You. Your Word reminds me that faith is not the absence of uncertainty, but the decision to anchor my soul in Your promises even when the storms are loud and the way is dim. Forgive me for the moments when I have leaned on my own understanding rather than trusting in Your perfect plan. I surrender my fears, my questions, and my unbelief to You right now. Strengthen me to walk boldly in faith today, to take the next step even when I cannot see the destination. May my life become a living testimony that You are faithful — that those who trust in You are never put to shame. In Jesus' name, Amen.",
+
+    love: "Lord of all love and grace, I confess that I do not always love the way You love. My love is conditional, distracted, and imperfect — but Yours is boundless, patient, and eternal. Pour Your love into me afresh this morning, until it overflows from every word I speak, every decision I make, and every person I encounter today. Help me to love not just those who are easy to love, but also those who are difficult, broken, or who have hurt me. Teach me to see others the way You see them — as image-bearers deserving of dignity and compassion. Let the love of Christ compel me in all I do today, so that when others see me, they may catch a glimpse of how deeply and tenderly You love them too. In the name of the One who is Love, Amen.",
+
+    courage: "God Almighty, I will not pretend that today feels easy. There are things ahead of me that make my heart race and my confidence falter. But Your Word says that You have not given me a spirit of fear, but of power and love and a sound mind. I claim that promise right now. Give me the courage to speak truth when silence would be easier, to do what is right when compromise is tempting, and to press forward when everything in me wants to retreat. You are the God who parted seas, who shut the mouths of lions, who raised the dead — and You are with me today. May that reality make me bold, not reckless, but confident in the One who goes before me and who will never leave my side. In the strong name of Jesus, Amen.",
+
+    prayer: "Father, thank You for the incredible gift of prayer — that I, a finite and flawed human being, can draw near to the infinite, holy God of all creation simply by calling on Your name. I do not take that lightly. Teach me to pray not just in moments of desperation, but in moments of joy, in moments of confusion, and in the quiet ordinary spaces of my day. Help me to be persistent in prayer, trusting that You hear every word and that Your timing is always perfect. When I do not know what to say, let Your Spirit intercede for me with groanings too deep for words. Let prayer become the breath of my soul — not a ritual I perform but a relationship I cherish. I surrender every anxiety, every burden, every hope, and every dream into Your capable, loving hands. In Jesus' name, Amen.",
+
+    forgiveness: "Merciful Father, Your forgiveness is one of the most staggering truths I know. That You would send Your own Son to bear the weight of every sin I have ever committed or ever will commit — that You would remove my transgressions as far as the east is from the west — I am undone by Your grace. Today I receive that forgiveness fully, not because I deserve it, but because Jesus paid a debt I could never pay. And Lord, as I receive Your forgiveness, help me to extend it to others. There are people in my life who have wounded me, disappointed me, or betrayed my trust. I know I cannot carry that bitterness — it only chains me. Give me the supernatural grace to release them, to let go, to forgive as You have forgiven me. Set both me and them free through the power of Your love. In the name of Jesus, Amen.",
+
+    hope: "Lord Jesus, You are the God of all hope, and I cling to that today. The world around me can feel heavy with sorrow, uncertainty, and loss — but You have spoken a different word over my life. You have promised that those who hope in You will not be disappointed. You are the anchor that holds when everything else gives way. Fill me with Your hope this morning — not wishful thinking, but a confident, unshakeable assurance that You are at work in every situation, even the ones I cannot understand. Help me to be a carrier of hope to those around me who are weary and discouraged. Let my life point others upward, toward the One who turns mourning into dancing, ashes into beauty, and darkness into glorious light. Because of Jesus, hope is never foolish — it is the most reasonable thing in the world. Amen.",
+
+    obedience: "Lord, I want to be someone who not only hears Your Word but actually lives it. Forgive me for the times I have known the right thing to do and chosen my own comfort instead. Obedience is not always easy — it asks me to lay down my pride, my preferences, and my plans. But I know that the path of obedience is the path of life, of peace, of becoming more fully who You created me to be. Today, wherever Your Word calls me to act, speak, give, forgive, or trust — give me a willing and obedient heart. Help me to remember that every act of obedience is an act of love, and that Your commands are not burdens but invitations into abundant life. Let my yes be yes and my no be no. Let my life be a reflection of a heart that is wholly Yours. In Jesus' name, Amen.",
+
+    peace: "Prince of Peace, I need You. The noise of this world — the worry, the rushing, the endless demands — can crowd out the quiet that my soul was made for. Your Word promises a peace that surpasses all understanding, a peace that guards my heart and mind in Christ Jesus. I receive that peace right now as a gift from Your hand. Help me to stop striving and to simply rest in the truth that You are God — that You are sovereign, that You are good, and that You are in control of every detail of my life. Where there is conflict in my relationships, bring reconciliation. Where there is anxiety in my mind, bring stillness. Where there is chaos around me, let me carry Your unexplainable calm into every room I enter today. Let me be a peacemaker — a child of God who reflects the peace of heaven everywhere I go. Amen.",
+
+    strength: "Almighty God, I am tired. I will not pretend otherwise. The weight of responsibilities, the drain of difficult seasons, and the slow accumulation of everyday battles have left me weary. But Your Word says that those who wait upon You will renew their strength — that they will mount up with wings like eagles, that they will run and not be weary, walk and not faint. I am waiting on You right now. Fill me with strength that is not my own — strength that comes from the inexhaustible reservoir of Your Spirit living inside me. Help me not to lean on my own energy today but to draw moment by moment from Your limitless power. Let every act of service, every conversation, every challenge I face today be done in the strength that You supply, so that You receive all the glory. In the mighty name of Jesus, Amen.",
+
+    wisdom: "Father of lights, from whom every good and perfect gift comes — I ask today for wisdom. Not merely knowledge or cleverness, but the deep, God-given wisdom that sees life through Your eyes, that weighs decisions by Your values, and that responds to people with grace and truth in equal measure. You have promised that if I ask for wisdom, You will give it generously without finding fault. I am asking. There are decisions before me that I do not fully understand. There are situations that require more than I have on my own. Guide my thoughts, my words, my choices today. Let Your Word be the lamp that lights every step and the compass that orients my heart. And let the wisdom You give me not just benefit me, but bless and serve everyone around me. In Jesus' name, Amen.",
+
+    faithfulness: "Lord, morning by morning new mercies I see — and this morning is no exception. Your faithfulness is breathtaking. Through every season of my life — the seasons of joy and the seasons of grief, the seasons of abundance and the seasons of want — You have been there. You have never broken a single promise. You have never abandoned me, never lost track of me, never stopped working on my behalf. Thank You. I want to respond to Your faithfulness with faithfulness of my own — faithful in prayer, faithful in worship, faithful in loving others, faithful in the little things that nobody sees but You. Teach me to treasure each day as a gift from Your hand. Help me to live not for the applause of the world but for the one thing that matters: hearing You say, ‘Well done, good and faithful servant.’ Let that be the longing that shapes everything I do today and every day. In Jesus’ faithful name, Amen."
   };
   return P[theme] || P.faithfulness;
 }
 
-/* ----- COPY TO CLIPBOARD ----- */
 function showToast(msg) {
   var t = document.getElementById('copyToast');
   if (!t) return;
