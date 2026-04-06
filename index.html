@@ -1585,6 +1585,11 @@ init();
 <!-- ========== FEATURES JS ========== -->
 <script>
 /* ----- STREAK COUNTER ----- */
+function closeStreakPopup() {
+  var p = document.getElementById('streakPopup');
+  if (p) p.style.display = 'none';
+  try { localStorage.setItem('dsStreakPopupDate', new Date().toISOString().slice(0,10)); } catch(e){}
+}
 (function() {
   try {
     var today = new Date().toISOString().slice(0,10);
@@ -1594,12 +1599,33 @@ init();
     else if (sd.date === yest) { sd.streak++; sd.date = today; }
     else { sd.streak = 1; sd.date = today; }
     localStorage.setItem('dsStreak', JSON.stringify(sd));
+    var badge = document.getElementById('streakBadge');
+    var cnt   = document.getElementById('streakCount');
+    if (badge && cnt) { cnt.textContent = sd.streak; badge.style.display = 'flex'; }
     if (sd.streak >= 2) {
-      var badge = document.getElementById('streakBadge');
-      var cnt   = document.getElementById('streakCount');
-      if (badge && cnt) { cnt.textContent = sd.streak; badge.style.display = 'inline-flex'; }
+      var lastShown = '';
+      try { lastShown = localStorage.getItem('dsStreakPopupDate') || ''; } catch(e){}
+      if (lastShown !== today) {
+        var msgs = [
+          "You’re building a beautiful habit. Each morning you return to God’s Word, your faith grows a little stronger.",
+          "Two days in a row — that’s not an accident. God is drawing you closer, and you’re saying yes.",
+          "Consistency is a form of worship. Keep showing up and watch what God does in your life.",
+          "Every day you open Scripture, you’re planting a seed. Keep watering it with faithfulness.",
+          "The enemy hates this streak. Heaven celebrates it. Keep going!",
+          "Your dedication to God’s Word is inspiring. Let it keep changing you from the inside out."
+        ];
+        var msgIdx = (sd.streak - 2) % msgs.length;
+        var popCount = document.getElementById('spCount');
+        var popMsg   = document.getElementById('spMsg');
+        if (popCount) popCount.textContent = sd.streak;
+        if (popMsg)   popMsg.textContent   = msgs[msgIdx];
+        setTimeout(function() {
+          var popup = document.getElementById('streakPopup');
+          if (popup) popup.style.display = 'flex';
+        }, 1200);
+      }
     }
-  } catch(e) {}
+  } catch(e) { console.warn('Streak err', e); }
 })();
 
 /* ----- PRAYER GENERATOR ----- */
@@ -1641,11 +1667,7 @@ function copyCard(titleId, refId, textId) {
   var title = (document.getElementById(titleId)||{}).textContent||'';
   var ref   = (document.getElementById(refId)||{}).textContent||'';
   var text  = (document.getElementById(textId)||{}).innerText||'';
-  var out = title + (ref?' ('+ref+')':'') + '
-
-' + text + '
-
-— Daily Scripture · kmk2123.github.io/daily-scripture/';
+  var out = title + (ref?' ('+ref+')':'') + '\n\n' + text + '\n\n— Daily Scripture · kmk2123.github.io/daily-scripture/';
   navigator.clipboard.writeText(out)
     .then(function(){ showToast('✅ Copied to clipboard!'); })
     .catch(function(){ showToast('Long-press to copy text manually'); });
@@ -1684,14 +1706,28 @@ function setupHighlight(textId) {
   var key = 'dsHL_' + textId + '_' + new Date().toISOString().slice(0,10);
   var saved = {};
   try { saved = JSON.parse(localStorage.getItem(key)||'{}'); } catch(e) {}
-  var lines = el.innerText.split('
-').filter(function(l){ return l.trim().length > 0; });
-  el.innerHTML = lines.map(function(line, i) {
+  var lines = el.innerText.split('\n');
+  el.innerHTML = lines.map(function(l,i){
     var hl = saved[i] ? ' verse-highlighted' : '';
-    return '<span class="verse-line'+hl+'" data-idx="'+i+'">'+line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</span>';
-  }).join('
-');
+    return '<span class="verse-line'+hl+'" data-idx="'+i+'">'+
+      l.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</span>';
+  }).join('\n');
+  // Visible highlight toggle button
+  var hlBtn = document.createElement('button');
+  hlBtn.className = 'hl-toggle-btn';
+  hlBtn.innerHTML = '\u270F\uFE0F Highlight a verse';
+  hlBtn.title = 'Toggle highlight mode then tap any verse line';
+  var hlMode = false;
+  hlBtn.addEventListener('click', function(ev) {
+    ev.stopPropagation();
+    hlMode = !hlMode;
+    hlBtn.classList.toggle('active', hlMode);
+    el.classList.toggle('hl-mode-on', hlMode);
+    hlBtn.innerHTML = hlMode ? '\u270F\uFE0F Tap a line to highlight' : '\u270F\uFE0F Highlight a verse';
+  });
+  el.parentNode.insertBefore(hlBtn, el);
   el.addEventListener('click', function(e) {
+    if (!hlMode) return;
     var span = e.target.closest('.verse-line');
     if (!span) return;
     span.classList.toggle('verse-highlighted');
@@ -1699,8 +1735,6 @@ function setupHighlight(textId) {
     try { localStorage.setItem(key, JSON.stringify(saved)); } catch(e) {}
   });
 }
-
-/* ----- SETUP: runs after passages load ----- */
 function setupInteractivity(theme) {
   ['ot','nt'].forEach(function(t) {
     var card = (document.getElementById(t+'-text')||{closest:function(){return null;}}).closest ? document.getElementById(t+'-text').closest('.card') : null;
