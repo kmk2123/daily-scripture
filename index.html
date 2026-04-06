@@ -1744,8 +1744,8 @@ function setupInteractivity(theme) {
     var actions = document.createElement('div');
     actions.className = 'card-actions';
     actions.innerHTML =
-      '<button class="card-action-btn" id="'+audioBtnId+'" onclick="toggleAudio(''+t+'-text',''+audioBtnId+'')">&#128266; Read Aloud</button>' +
-      '<button class="card-action-btn" id="'+copyBtnId+'"  onclick="copyCard(''+t+'-title',''+t+'-ref',''+t+'-text')">&#128203; Copy</button>';
+      '<button class="card-action-btn" id="'+audioBtnId+'" onclick="toggleAudio(\''+t+'-text\',\''+audioBtnId+'\')">&#128266; Read Aloud</button>' +
+      '<button class="card-action-btn" id="'+copyBtnId+'"  onclick="copyCard(\''+t+'-title\',\''+t+'-ref\',\''+t+'-text\')">&#128203; Copy</button>';
     var illus = card.querySelector('.card-illustration');
     illus ? card.insertBefore(actions, illus) : card.appendChild(actions);
     setupHighlight(t+'-text');
