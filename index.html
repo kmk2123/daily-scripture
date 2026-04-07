@@ -771,6 +771,7 @@
       padding: .6rem 0 .2rem;
       flex-wrap: wrap;
     }
+    .voice-select { width:100%; padding:6px 8px; border-radius:8px; border:1.5px solid var(--card-border,#e0d6c8); background:var(--card-bg,#fff); color:var(--text-main,#3a2a18); font-size:0.92rem; cursor:pointer; margin-top:4px; }
     .card-action-btn {
       display: inline-flex; align-items: center; gap: 5px;
       padding: 7px 14px;
@@ -810,7 +811,7 @@
       margin-bottom: 2px;
     }
     .verse-line:hover { background: rgba(212,168,67,.12); }
-    .verse-highlighted { background: var(--hl-color, #FFD700) !important; border-radius: 3px; padding: 1px 3px; opacity: 0.9; }
+    .verse-highlighted { background: var(--hl-color, #FFD700) !important; padding: 1px 2px; opacity: 0.9; }
     /* Highlight mode active indicator */
     .verse-text.hl-mode-on { cursor: crosshair; }
     .hl-toggle-btn {
@@ -1493,6 +1494,12 @@ init();
         <div class="hl-swatch" data-hl="#E6CCFF" style="background:#E6CCFF" title="Purple"></div>
       </div>
     </div>
+    <div class="settings-group">
+      <div class="settings-group-label">🔊 Voice</div>
+      <select class="voice-select" id="voiceSelect">
+        <option value="">Default (system)</option>
+      </select>
+    </div>
   </div>
   <div class="settings-footer">Preferences saved automatically</div>
 </div>
@@ -1535,11 +1542,33 @@ init();
     });
   }
 
+  function saveVoice(name) {
+    var p = {}; try { p = JSON.parse(localStorage.getItem('dsPrefs')||'{}'); } catch(e) {}
+    p.voice = name;
+    try { localStorage.setItem('dsPrefs', JSON.stringify(p)); } catch(e) {}
+  }
+
+  function populateVoices() {
+    var sel = document.getElementById('voiceSelect');
+    if (!sel) return;
+    var voices = window.speechSynthesis.getVoices();
+    var enVoices = voices.filter(function(v){return /en/i.test(v.lang);});
+    if (!enVoices.length) enVoices = voices;
+    var p = {}; try { p = JSON.parse(localStorage.getItem('dsPrefs')||'{}'); } catch(e) {}
+    sel.innerHTML = '<option value="">Default (system)</option>';
+    enVoices.forEach(function(v) {
+      var opt = document.createElement('option');
+      opt.value = v.name; opt.textContent = v.name;
+      if (p.voice === v.name) opt.selected = true;
+      sel.appendChild(opt);
+    });
+  }
+
   function save() {
     try { localStorage.setItem('dsPrefs', JSON.stringify({theme:theme,size:size,font:font,hlColor:hlColor})); } catch(e) {}
   }
 
-  function openPanel()  { document.getElementById('settingsPanel').classList.add('open'); document.getElementById('settingsOverlay').classList.add('open'); }
+  function openPanel()  { document.getElementById('settingsPanel').classList.add('open'); document.getElementById('settingsOverlay').classList.add('open'); populateVoices(); }
   function closePanel() { document.getElementById('settingsPanel').classList.remove('open'); document.getElementById('settingsOverlay').classList.remove('open'); }
 
   document.getElementById('settingsBtn').addEventListener('click', openPanel);
@@ -1686,13 +1715,22 @@ function toggleAudio(textId, btnId) {
   var text = (document.getElementById(textId)||{}).innerText||'';
   if (!text) return;
   var utt = new SpeechSynthesisUtterance(text);
-  utt.rate = 0.87; utt.pitch = 1.0;
+  utt.rate = 0.87; utt.pitch = 0.9;
   utt.onend = function() {
     _ttsId = null;
     if (btn) { btn.textContent = '🔊 Read Aloud'; btn.classList.remove('playing'); }
   };
   _ttsId = textId;
   if (btn) { btn.textContent = '⏹️ Stop'; btn.classList.add('playing'); }
+  var prefs5 = {}; try { prefs5 = JSON.parse(localStorage.getItem('dsPrefs')||'{}'); } catch(e) {}
+  var voices = window.speechSynthesis.getVoices();
+  if (prefs5.voice && voices.length) {
+    var chosen = voices.find(function(v){return v.name===prefs5.voice;});
+    if (chosen) utt.voice = chosen;
+  } else if (voices.length) {
+    var soothing = voices.find(function(v){return /Samantha|Karen|Moira|Zira|Hazel|UK.*Female|Female.*UK|Google UK English Female/i.test(v.name) && /en/i.test(v.lang);});
+    if (soothing) utt.voice = soothing;
+  }
   synth.speak(utt);
 }
 
@@ -1704,10 +1742,10 @@ function setupHighlight(textId) {
   var saved = {};
   try { saved = JSON.parse(localStorage.getItem(key)||'{}'); } catch(e) {}
   var wordIdx = 0;
-  el.innerHTML = el.innerText.replace(/(\S+)/g, function(word) {
+  el.innerHTML = el.innerText.replace(/(\S+)(\s*)/g, function(m, word, space) {
     var hl = saved[wordIdx] ? ' verse-highlighted' : '';
     var span = '<span class="verse-word'+hl+'" data-idx="'+wordIdx+'">'+
-      word.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</span>';
+      word.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+space+'</span>';
     wordIdx++;
     return span;
   });
