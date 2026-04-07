@@ -810,12 +810,7 @@
       margin-bottom: 2px;
     }
     .verse-line:hover { background: rgba(212,168,67,.12); }
-    .verse-highlighted {
-      background: var(--hl-color, #FFD700) !important;
-      border-left: 3px solid var(--gold);
-      padding-left: 8px;
-      opacity: 0.85;
-    }
+    .verse-highlighted { background: var(--hl-color, #FFD700) !important; border-radius: 3px; padding: 1px 3px; opacity: 0.9; }
     /* Highlight mode active indicator */
     .verse-text.hl-mode-on { cursor: crosshair; }
     .hl-toggle-btn {
@@ -1706,29 +1701,29 @@ function setupHighlight(textId) {
   var key = 'dsHL_' + textId + '_' + new Date().toISOString().slice(0,10);
   var saved = {};
   try { saved = JSON.parse(localStorage.getItem(key)||'{}'); } catch(e) {}
-  var lines = el.innerText.split('\n');
-  el.innerHTML = lines.map(function(l,i){
-    var hl = saved[i] ? ' verse-highlighted' : '';
-    return '<span class="verse-line'+hl+'" data-idx="'+i+'">'+
-      l.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</span>';
-  }).join('\n');
-  // Visible highlight toggle button
+  var wordIdx = 0;
+  el.innerHTML = el.innerText.replace(/(\S+)/g, function(word) {
+    var hl = saved[wordIdx] ? ' verse-highlighted' : '';
+    var span = '<span class="verse-word'+hl+'" data-idx="'+wordIdx+'">'+
+      word.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</span>';
+    wordIdx++;
+    return span;
+  });
   var hlBtn = document.createElement('button');
   hlBtn.className = 'hl-toggle-btn';
-  hlBtn.innerHTML = '\u270F\uFE0F Highlight a verse';
-  hlBtn.title = 'Toggle highlight mode then tap any verse line';
+  hlBtn.innerHTML = '\u270F\uFE0F Highlight a word';
   var hlMode = false;
   hlBtn.addEventListener('click', function(ev) {
     ev.stopPropagation();
     hlMode = !hlMode;
     hlBtn.classList.toggle('active', hlMode);
     el.classList.toggle('hl-mode-on', hlMode);
-    hlBtn.innerHTML = hlMode ? '\u270F\uFE0F Tap a line to highlight' : '\u270F\uFE0F Highlight a verse';
+    hlBtn.innerHTML = hlMode ? '\u270F\uFE0F Tap a word to highlight' : '\u270F\uFE0F Highlight a word';
   });
   el.parentNode.insertBefore(hlBtn, el);
   el.addEventListener('click', function(e) {
     if (!hlMode) return;
-    var span = e.target.closest('.verse-line');
+    var span = e.target.closest('.verse-word');
     if (!span) return;
     span.classList.toggle('verse-highlighted');
     saved[span.dataset.idx] = span.classList.contains('verse-highlighted') ? 1 : 0;
@@ -1744,8 +1739,7 @@ function setupInteractivity(theme) {
     var actions = document.createElement('div');
     actions.className = 'card-actions';
     actions.innerHTML =
-      '<button class="card-action-btn" id="'+audioBtnId+'" onclick="toggleAudio(\''+t+'-text\',\''+audioBtnId+'\')">&#128266; Read Aloud</button>' +
-      '<button class="card-action-btn" id="'+copyBtnId+'"  onclick="copyCard(\''+t+'-title\',\''+t+'-ref\',\''+t+'-text\')">&#128203; Copy</button>';
+      '<button class="card-action-btn" id="'+audioBtnId+'" onclick="toggleAudio(\''+t+'-text\',\''+audioBtnId+'\')">&#128266; Read Aloud</button>';
     var illus = card.querySelector('.card-illustration');
     illus ? card.insertBefore(actions, illus) : card.appendChild(actions);
     setupHighlight(t+'-text');
