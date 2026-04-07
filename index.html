@@ -1765,7 +1765,7 @@ function openZoom(textId) {
   var titleEl = card ? card.querySelector('h3, .card-title, [class*="title"]') : null;
   document.getElementById('zoomLabel').textContent = labelEl ? labelEl.innerText : '';
   document.getElementById('zoomRef').textContent = (titleEl ? titleEl.innerText + ' — ' : '') + (refEl ? refEl.innerText : '');
-  document.getElementById('zoomText').innerText = el.innerText;
+  var ztEl=document.getElementById('zoomText'); ztEl.innerText=el.innerText; ztEl.style.fontFamily=window.getComputedStyle(el).fontFamily;
   var ov = document.getElementById('zoomOverlay');
   ov.style.display = 'flex'; ov.classList.add('open');
 }
@@ -1858,8 +1858,7 @@ function setupInteractivity(theme) {
     var actions = document.createElement('div');
     actions.className = 'card-actions';
     actions.innerHTML =
-      '<button class="card-action-btn copy-btn" id="'+copyBtnId+'" onclick="copyVerse(\''+t+'-text\',\''+copyBtnId+'\')">&#128203; Copy Verse</button>'+
-      '<button class="card-action-btn" id="'+audioBtnId+'" onclick="toggleAudio(\''+t+'-text\',\''+audioBtnId+'\')">' + String.fromCharCode(128266) + ' Read Aloud (Beta)</button>';
+      '<button class="card-action-btn" id="'+audioBtnId+'" onclick="toggleAudio(\''+t+'-text\',\''+audioBtnId+'\')">&#128266; Read Aloud (Beta)</button>';
     var illus = card.querySelector('.card-illustration');
     illus ? card.insertBefore(actions, illus) : card.appendChild(actions);
     setupHighlight(t+'-text');
