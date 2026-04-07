@@ -876,7 +876,7 @@
   <h1>Daily Scripture</h1>
   <p class="hdr-subtitle">God's Word — Fresh Every Morning</p>
   <div class="date-pill" id="date-pill">Loading date…</div>
-  <div class="streak-badge" id="streakBadge" style="display:none" onclick="document.getElementById('streakPopup').style.display='flex'">🔥 <span id="streakCount">1</span>-day streak</div>
+  <div class="streak-badge" id="streakBadge" style="display:none" onclick="var sc=document.getElementById('spCount'),sk=document.getElementById('streakCount');if(sc&&sk)sc.textContent=sk.textContent;document.getElementById('streakPopup').style.display='flex'">🔥 <span id="streakCount">1</span>-day streak</div>
 </header>
 
 <!-- Streak popup (shown on each day-2+ visit) -->
@@ -1556,19 +1556,35 @@ init();
       window.speechSynthesis.onvoiceschanged = function() { populateVoices(); window.speechSynthesis.onvoiceschanged = null; };
       return;
     }
-    var enVoices = voices.filter(function(v){return /en/i.test(v.lang);});
-    if (!enVoices.length) enVoices = voices;
+    // Curated soothing voices, in order of preference
+    var preferred = [
+      'Samantha','Karen','Moira','Tessa','Serena','Fiona',
+      'Google UK English Female','Microsoft Zira Desktop - English (United States)'
+    ];
     var p = {}; try { p = JSON.parse(localStorage.getItem('dsPrefs')||'{}'); } catch(e) {}
     sel.innerHTML = '<option value="">Default (system)</option>';
     sel.onchange = function(){ saveVoice(sel.value); };
-    enVoices.forEach(function(v) {
-      var opt = document.createElement('option');
-      opt.value = v.name; opt.textContent = v.name;
-      if (p.voice === v.name) opt.selected = true;
-      sel.appendChild(opt);
+    var added = 0;
+    preferred.forEach(function(name) {
+      var v = voices.find(function(v){ return v.name === name; });
+      if (v && added < 8) {
+        var opt = document.createElement('option');
+        opt.value = v.name; opt.textContent = v.name;
+        if (p.voice === v.name) opt.selected = true;
+        sel.appendChild(opt); added++;
+      }
     });
+    // If fewer than 3 curated found, fill with female English voices
+    if (added < 3) {
+      voices.filter(function(v){ return /en/i.test(v.lang) && /female|woman|girl/i.test(v.name); })
+        .slice(0, 8 - added).forEach(function(v) {
+          var opt = document.createElement('option');
+          opt.value = v.name; opt.textContent = v.name;
+          if (p.voice === v.name) opt.selected = true;
+          sel.appendChild(opt);
+        });
+    }
   }
-
   function save() {
     try { localStorage.setItem('dsPrefs', JSON.stringify({theme:theme,size:size,font:font,hlColor:hlColor})); } catch(e) {}
   }
