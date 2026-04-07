@@ -1552,6 +1552,10 @@ init();
     var sel = document.getElementById('voiceSelect');
     if (!sel) return;
     var voices = window.speechSynthesis.getVoices();
+    if (!voices.length) {
+      window.speechSynthesis.onvoiceschanged = function() { populateVoices(); window.speechSynthesis.onvoiceschanged = null; };
+      return;
+    }
     var enVoices = voices.filter(function(v){return /en/i.test(v.lang);});
     if (!enVoices.length) enVoices = voices;
     var p = {}; try { p = JSON.parse(localStorage.getItem('dsPrefs')||'{}'); } catch(e) {}
