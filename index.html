@@ -1556,6 +1556,7 @@ init();
     if (!enVoices.length) enVoices = voices;
     var p = {}; try { p = JSON.parse(localStorage.getItem('dsPrefs')||'{}'); } catch(e) {}
     sel.innerHTML = '<option value="">Default (system)</option>';
+    sel.onchange = function(){ saveVoice(sel.value); };
     enVoices.forEach(function(v) {
       var opt = document.createElement('option');
       opt.value = v.name; opt.textContent = v.name;
