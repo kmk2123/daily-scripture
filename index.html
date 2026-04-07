@@ -1483,15 +1483,15 @@ init();
       </div>
     </div>
 
-  </div>
-  <div class="settings-group">
-    <div class="settings-label">🎨 Highlight Color</div>
-    <div class="hl-color-row" id="hlColorOpts">
-      <div class="hl-swatch active" data-hl="#FFD700" style="background:#FFD700" title="Gold"></div>
-      <div class="hl-swatch" data-hl="#90EE90" style="background:#90EE90" title="Green"></div>
-      <div class="hl-swatch" data-hl="#ADD8E6" style="background:#ADD8E6" title="Blue"></div>
-      <div class="hl-swatch" data-hl="#FFB6C1" style="background:#FFB6C1" title="Pink"></div>
-      <div class="hl-swatch" data-hl="#E6CCFF" style="background:#E6CCFF" title="Purple"></div>
+    <div class="settings-group">
+      <div class="settings-group-label">🎨 Highlight Color</div>
+      <div class="hl-color-row" id="hlColorOpts">
+        <div class="hl-swatch active" data-hl="#FFD700" style="background:#FFD700" title="Gold"></div>
+        <div class="hl-swatch" data-hl="#90EE90" style="background:#90EE90" title="Green"></div>
+        <div class="hl-swatch" data-hl="#ADD8E6" style="background:#ADD8E6" title="Blue"></div>
+        <div class="hl-swatch" data-hl="#FFB6C1" style="background:#FFB6C1" title="Pink"></div>
+        <div class="hl-swatch" data-hl="#E6CCFF" style="background:#E6CCFF" title="Purple"></div>
+      </div>
     </div>
   </div>
   <div class="settings-footer">Preferences saved automatically</div>
@@ -1524,12 +1524,14 @@ init();
   }
 
   function syncButtons() {
-    var all = document.querySelectorAll('[data-theme],[data-size],[data-font]');
-    all.forEach(function(btn) {
-      var active = (btn.dataset.theme && btn.dataset.theme === theme) ||
-                   (btn.dataset.size  && btn.dataset.size  === size)  ||
-                   (btn.dataset.font  && btn.dataset.font  === font);
-      btn.classList.toggle('active', active);
+    document.querySelectorAll('#themeOpts .sopt').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.theme === theme);
+    });
+    document.querySelectorAll('#sizeOpts .sopt').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.size === size);
+    });
+    document.querySelectorAll('#fontOpts .sopt').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.font === font);
     });
   }
 
