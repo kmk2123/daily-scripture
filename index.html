@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daily Scripture â God's Word for Today</title>
+  <title>Daily Scripture — God's Word for Today</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;600;700;800&display=swap"
     rel="stylesheet"
@@ -391,7 +391,7 @@
       animation: riseIn .8s ease 1s forwards;
     }
     .reflection::before {
-      content: 'ð­';
+      content: '💭';
       position: absolute;
       font-size: 10rem;
       top: -20px; right: -10px;
@@ -872,22 +872,22 @@
     body.theme-night .prayer-text { color: #a5b4fc; }
     .prayer-hands { font-size: 2rem; display: block; margin-bottom: 14px; }
     
-  .kofi-btn {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 7px 18px;
-    background: #72a4f2;
-    color: #fff;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-decoration: none;
-    letter-spacing: 0.03em;
-    transition: background 0.2s, transform 0.15s;
-    box-shadow: 0 2px 8px rgba(114,164,242,0.4);
-  }
-  .kofi-btn:hover { background: #5a8fe0; transform: translateY(-1px); }
-  </style>
+.kofi-header-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 7px 18px;
+  background: #72a4f2;
+  color: #fff;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 2px 8px rgba(114,164,242,0.4);
+}
+.kofi-header-btn:hover { background: #5a8fe0; transform: translateY(-1px); }
+</style>
 </head>
 <body>
 
@@ -898,23 +898,23 @@
 <header>
   <div class="hdr-glow"></div>
   <div id="hdr-stars"></div>
-  <div class="hdr-cross">â</div>
-  <div class="crown-row">â¦ â¦ â¦</div>
+  <div class="hdr-cross">✝</div>
+  <div class="crown-row">✦ ✦ ✦</div>
   <h1>Daily Scripture</h1>
-  <p class="hdr-subtitle">God's Word â Fresh Every Morning</p>
-  <div class="date-pill" id="date-pill">Loading dateâ¦</div>
-  <div class="streak-badge" id="streakBadge" style="display:none" onclick="var sc=document.getElementById('spCount'),sk=document.getElementById('streakCount');if(sc&&sk)sc.textContent=sk.textContent;document.getElementById('streakPopup').style.display='flex'">ð¥ <span id="streakCount">1</span>-day streak</div>
-  <a href="https://ko-fi.com/dailyscripture" target="_blank" rel="noopener" class="kofi-btn">☕ Support This Site</a>
+  <p class="hdr-subtitle">God's Word — Fresh Every Morning</p>
+  <div class="date-pill" id="date-pill">Loading date…</div>
+  <div class="streak-badge" id="streakBadge" style="display:none" onclick="var sc=document.getElementById('spCount'),sk=document.getElementById('streakCount');if(sc&&sk)sc.textContent=sk.textContent;document.getElementById('streakPopup').style.display='flex'">🔥 <span id="streakCount">1</span>-day streak</div>
+  <a href="https://ko-fi.com/dailyscripture" target="_blank" rel="noopener" class="kofi-header-btn">☕ Support This Site</a>
 </header>
 
 <!-- Streak popup (shown on each day-2+ visit) -->
 <div class="streak-popup-overlay" id="streakPopup" style="display:none" onclick="if(event.target===this)closeStreakPopup()">
   <div class="streak-popup">
-    <div class="sp-flame">ð¥</div>
+    <div class="sp-flame">🔥</div>
     <div class="sp-count" id="spCount">1</div>
     <div class="sp-label">Day Streak!</div>
-    <p class="sp-msg" id="spMsg">You're on fire! Keep coming back to God's Word every day â your consistency is building something beautiful.</p>
-    <button class="sp-close" onclick="closeStreakPopup()">Keep It Going â</button>
+    <p class="sp-msg" id="spMsg">You're on fire! Keep coming back to God's Word every day — your consistency is building something beautiful.</p>
+    <button class="sp-close" onclick="closeStreakPopup()">Keep It Going →</button>
   </div>
 </div>
 
@@ -933,7 +933,7 @@
 
   <!-- Intro quote -->
   <div class="intro-quote">
-    <span>"Thy word is a lamp unto my feet, and a light unto my path." â Psalm 119:105</span>
+    <span>"Thy word is a lamp unto my feet, and a light unto my path." — Psalm 119:105</span>
   </div>
 
   <!-- Illustrated separator (sun-ray SVG) -->
@@ -967,9 +967,9 @@
 
     <!-- OT Card -->
     <div class="card ot-card">
-      <div class="card-watermark">ð</div>
-      <div class="card-label">ð Old Testament</div>
-      <div class="passage-title" id="ot-title">Loadingâ¦</div>
+      <div class="card-watermark">📜</div>
+      <div class="card-label">📖 Old Testament</div>
+      <div class="passage-title" id="ot-title">Loading…</div>
       <div class="passage-ref"  id="ot-ref"></div>
       <div class="card-rule"></div>
       <div class="verse-text"  id="ot-text">
@@ -980,7 +980,7 @@
           </div>
         </div>
       </div>
-      <div class="card-copy-bar"><button class="copy-icon-btn" onclick="copyCard('ot-title','ot-ref','ot-text')" title="Copy verse">ð Copy verse</button></div>
+      <div class="card-copy-bar"><button class="copy-icon-btn" onclick="copyCard('ot-title','ot-ref','ot-text')" title="Copy verse">📋 Copy verse</button></div>
       <div class="card-illustration">
         <svg viewBox="0 0 280 72" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
@@ -1007,9 +1007,9 @@
 
     <!-- NT Card -->
     <div class="card nt-card">
-      <div class="card-watermark">âï¸</div>
-      <div class="card-label">âï¸ New Testament</div>
-      <div class="passage-title" id="nt-title">Loadingâ¦</div>
+      <div class="card-watermark">✝️</div>
+      <div class="card-label">✝️ New Testament</div>
+      <div class="passage-title" id="nt-title">Loading…</div>
       <div class="passage-ref"  id="nt-ref"></div>
       <div class="card-rule"></div>
       <div class="verse-text"  id="nt-text">
@@ -1020,7 +1020,7 @@
           </div>
         </div>
       </div>
-      <div class="card-copy-bar"><button class="copy-icon-btn" onclick="copyCard('nt-title','nt-ref','nt-text')" title="Copy verse">ð Copy verse</button></div>
+      <div class="card-copy-bar"><button class="copy-icon-btn" onclick="copyCard('nt-title','nt-ref','nt-text')" title="Copy verse">📋 Copy verse</button></div>
       <div class="card-illustration">
         <svg viewBox="0 0 280 72" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
@@ -1058,35 +1058,35 @@
 
   <!-- ====== SIMPLIFIED READINGS ====== -->
   <div class="simplified-intro">
-    <h2>ð¡ Reflect &amp; Apply</h2>
-    <p>What each passage means â and how to bring it into your own life today</p>
+    <h2>💡 Reflect &amp; Apply</h2>
+    <p>What each passage means — and how to bring it into your own life today</p>
   </div>
 
   <div class="readings-grid">
     <div class="card ot-reflect-card">
-      <div class="card-watermark">ð</div>
-      <div class="card-label">ð Old Testament â Reflection</div>
-      <div class="passage-title" id="ot-reflect-title">Loadingâ¦</div>
+      <div class="card-watermark">📜</div>
+      <div class="card-label">📜 Old Testament — Reflection</div>
+      <div class="passage-title" id="ot-reflect-title">Loading…</div>
       <div class="card-rule"></div>
-      <div class="reflect-meaning"><div class="reflect-section-label">What It Means</div><p id="ot-reflect-text">Loadingâ¦</p></div>
-      <div class="reflect-apply"><div class="reflect-section-label">Apply It Today</div><ul id="ot-apply-list"><li>Loadingâ¦</li></ul></div>
+      <div class="reflect-meaning"><div class="reflect-section-label">What It Means</div><p id="ot-reflect-text">Loading…</p></div>
+      <div class="reflect-apply"><div class="reflect-section-label">Apply It Today</div><ul id="ot-apply-list"><li>Loading…</li></ul></div>
       <div class="card-illustration"><svg viewBox="0 0 280 72" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="sg" cx="50%" cy="100%" r="80%"><stop offset="0%" stop-color="rgba(212,168,67,.18)"/><stop offset="100%" stop-color="rgba(212,168,67,0)"/></radialGradient></defs><rect width="280" height="72" fill="url(#sg)"/><line x1="0" y1="52" x2="280" y2="52" stroke="rgba(212,168,67,.25)" stroke-width="1" stroke-dasharray="4,4"/><circle cx="140" cy="56" r="16" fill="rgba(212,168,67,.55)"/><g stroke="rgba(212,168,67,.5)" stroke-width="1.5" stroke-linecap="round"><line x1="140" y1="34" x2="140" y2="28"/><line x1="158" y1="39" x2="162" y2="35"/><line x1="164" y1="56" x2="170" y2="56"/><line x1="158" y1="73" x2="162" y2="77"/><line x1="122" y1="39" x2="118" y2="35"/><line x1="116" y1="56" x2="110" y2="56"/></g><path d="M0,72 Q40,40 70,52 Q100,62 120,50 Q150,35 180,48 Q210,58 240,46 Q260,38 280,44 L280,72 Z" fill="rgba(212,168,67,.22)"/></svg></div>
     </div>
     <div class="card nt-reflect-card">
-      <div class="card-watermark">âï¸</div>
-      <div class="card-label">âï¸ New Testament â Reflection</div>
-      <div class="passage-title" id="nt-reflect-title">Loadingâ¦</div>
+      <div class="card-watermark">✝️</div>
+      <div class="card-label">✝️ New Testament — Reflection</div>
+      <div class="passage-title" id="nt-reflect-title">Loading…</div>
       <div class="card-rule"></div>
-      <div class="reflect-meaning"><div class="reflect-section-label">What It Means</div><p id="nt-reflect-text">Loadingâ¦</p></div>
-      <div class="reflect-apply"><div class="reflect-section-label">Apply It Today</div><ul id="nt-apply-list"><li>Loadingâ¦</li></ul></div>
+      <div class="reflect-meaning"><div class="reflect-section-label">What It Means</div><p id="nt-reflect-text">Loading…</p></div>
+      <div class="reflect-apply"><div class="reflect-section-label">Apply It Today</div><ul id="nt-apply-list"><li>Loading…</li></ul></div>
       <div class="card-illustration"><svg viewBox="0 0 280 72" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="ng" cx="50%" cy="80%" r="70%"><stop offset="0%" stop-color="rgba(99,102,241,.2)"/><stop offset="100%" stop-color="rgba(99,102,241,0)"/></radialGradient></defs><rect width="280" height="72" fill="url(#ng)"/><g stroke="rgba(99,102,241,.18)" stroke-width="1" stroke-linecap="round"><line x1="140" y1="0" x2="140" y2="72"/><line x1="60" y1="36" x2="220" y2="36"/><line x1="100" y1="5" x2="180" y2="67"/><line x1="180" y1="5" x2="100" y2="67"/></g><line x1="140" y1="12" x2="140" y2="68" stroke="rgba(99,102,241,.65)" stroke-width="3" stroke-linecap="round"/><line x1="118" y1="30" x2="162" y2="30" stroke="rgba(99,102,241,.65)" stroke-width="3" stroke-linecap="round"/><circle cx="140" cy="36" r="6" fill="rgba(99,102,241,.15)" stroke="rgba(99,102,241,.4)" stroke-width="1"/><circle cx="80" cy="16" r="2" fill="rgba(99,102,241,.35)"/><circle cx="200" cy="56" r="2" fill="rgba(99,102,241,.35)"/><circle cx="60" cy="58" r="1.5" fill="rgba(99,102,241,.25)"/><circle cx="220" cy="18" r="1.5" fill="rgba(99,102,241,.25)"/></svg></div>
     </div>
   </div>
 
   <!-- ====== REFLECTION ====== -->
   <div class="reflection">
-    <h3>ð­ Think About It</h3>
-    <p id="reflection-q">Loading reflectionâ¦</p>
+    <h3>💭 Think About It</h3>
+    <p id="reflection-q">Loading reflection…</p>
   </div>
 
 </main>
@@ -1096,22 +1096,22 @@
 <!-- ========== PRAYER SECTION ========== -->
 <section class="prayer-section">
   <div class="prayer-intro">
-    <h2>ð Today's Prayer</h2>
-    <p>A prayer drawn from today's scripture â speak it, reflect on it, make it your own</p>
+    <h2>🙏 Today's Prayer</h2>
+    <p>A prayer drawn from today's scripture — speak it, reflect on it, make it your own</p>
   </div>
   <div class="prayer-card">
-    <span class="prayer-hands">ð</span>
-    <p class="prayer-text" id="prayerText">Lord, open my heart to Your Word todayâ¦</p>
+    <span class="prayer-hands">🙏</span>
+    <p class="prayer-text" id="prayerText">Lord, open my heart to Your Word today…</p>
   </div>
 </section>
 
 <!-- ========== SUPPORT / DONATION ========== -->
 <section class="support-section">
   <div class="support-card">
-    <span class="support-icon">â</span>
+    <span class="support-icon">☕</span>
     <h2 class="support-title">Keep This Ministry Free</h2>
     <p class="support-subtitle">
-      Daily Scripture is completely free â no ads, no paywalls, no tracking.
+      Daily Scripture is completely free — no ads, no paywalls, no tracking.
       If it has brought you peace, comfort, or a moment with God today,
       consider supporting it with a small gift.
     </p>
@@ -1120,26 +1120,26 @@
          href="https://ko-fi.com/YOUR_USERNAME"
          target="_blank" rel="noopener"
          id="kofiDonateBtn">
-        â Buy Us a Coffee
+        ☕ Buy Us a Coffee
       </a>
       <a class="member-btn"
          href="https://ko-fi.com/YOUR_USERNAME/tiers"
          target="_blank" rel="noopener"
          id="kofiMemberBtn">
-        â¦ Become a Member
+        ✦ Become a Member
       </a>
     </div>
     <div class="support-tiers">
-      <span class="tier-pill">â One-time gift</span>
-      <span class="tier-pill">ð Monthly supporter</span>
-      <span class="tier-pill">âï¸ Ministry partner</span>
+      <span class="tier-pill">☕ One-time gift</span>
+      <span class="tier-pill">🌟 Monthly supporter</span>
+      <span class="tier-pill">✝️ Ministry partner</span>
     </div>
-    <p class="support-note">Every contribution â large or small â helps this site stay online and ad-free.</p>
+    <p class="support-note">Every contribution — large or small — helps this site stay online and ad-free.</p>
   </div>
 </section>
 
 <footer>
-  <p>ð King James Version &nbsp;Â·&nbsp; New readings every day &nbsp;Â·&nbsp; Made with <span class="footer-heart">â¥</span> for God's glory</p>
+  <p>📖 King James Version &nbsp;·&nbsp; New readings every day &nbsp;·&nbsp; Made with <span class="footer-heart">♥</span> for God's glory</p>
 </footer>
 
 <!-- ========================================================
@@ -1279,17 +1279,17 @@ const REFLECTIONS = [
   "What does today's Old Testament story teach you about how God keeps His promises? How does the New Testament reading show that same promise fulfilled?",
   "Think about a character from today's Old Testament reading. What challenge did they face, and how did God help them? Can you think of a time God helped you with something hard?",
   "Today's New Testament passage shows us something about Jesus. What one word would you use to describe what you learned about Him today?",
-  "The Old Testament reading happened thousands of years ago â but does it still feel relevant to your life? What part stood out to you most, and why?",
+  "The Old Testament reading happened thousands of years ago — but does it still feel relevant to your life? What part stood out to you most, and why?",
   "Jesus often said things that surprised people. Does anything in today's New Testament reading surprise you? What does it make you want to do differently?",
   "Today's readings have a theme in common. Can you find it? Write it down and think about how it applies to your life this week.",
   "If the person in today's Old Testament story were your friend, what advice would you give them? What would you tell them about God based on what you read?",
   "Is there a verse from today's readings you want to memorize? Say it out loud three times and ask God to help it stick in your heart.",
   "How does today's Old Testament passage point forward to Jesus? What connection do you see between the two readings?",
-  "God has different ways of speaking to people in the Bible â through dreams, angels, burning bushes, and still small voices. How has God spoken to your heart lately?",
+  "God has different ways of speaking to people in the Bible — through dreams, angels, burning bushes, and still small voices. How has God spoken to your heart lately?",
   "What does today's New Testament reading say about how to treat other people? Is there someone in your life you could love better this week?",
   "Today's Old Testament passage shows us something about who God is. List three things you learned about God's character from today's reading.",
   "The Bible says God's Word is 'a lamp to our feet.' After reading today, what is one step God might be asking you to take?",
-  "What emotions do you notice in the characters in today's readings â fear, joy, doubt, hope? Have you ever felt those same emotions in your relationship with God?",
+  "What emotions do you notice in the characters in today's readings — fear, joy, doubt, hope? Have you ever felt those same emotions in your relationship with God?",
   "Is there something in today's New Testament reading that seems hard or impossible to live out? Ask God to help you take one small step toward it.",
 ];
 
@@ -1329,7 +1329,7 @@ async function fetchPassage(apiRef, elId, translation) {
       throw new Error('No text returned');
     }
   } catch(e) {
-    el.innerHTML = `<div class="err-msg">â ï¸ Could not load this passage. Please check your internet connection and refresh the page.</div>`;
+    el.innerHTML = `<div class="err-msg">⚠️ Could not load this passage. Please check your internet connection and refresh the page.</div>`;
   }
 }
 
@@ -1393,16 +1393,16 @@ function generateReflection(ref, verseText) {
   if (/wisdom|understand/.test(t)) themes.push("wisdom");
   var theme = themes[0] || "faithfulness";
   var M = {
-    faith:"This passage calls us to trust in God even when circumstances feel uncertain. Faith is not about having all the answersâit is about holding on to the One who does.",
-    love:"This passage reveals the depth of God's love and invites us to reflect that love in our relationships. Genuine loveâthe kind described hereâis selfless, patient, and transformative.",
+    faith:"This passage calls us to trust in God even when circumstances feel uncertain. Faith is not about having all the answers—it is about holding on to the One who does.",
+    love:"This passage reveals the depth of God's love and invites us to reflect that love in our relationships. Genuine love—the kind described here—is selfless, patient, and transformative.",
     courage:"This scripture speaks to the fears that hold us back and God's steady response: do not be afraid. Courage is not the absence of fear but acting despite it, anchored in God's presence.",
-    prayer:"This passage opens a window into honest communication with God. Prayer is more than ritualâit is the lifeline through which we access His strength, wisdom, and comfort each day.",
-    forgiveness:"Forgiveness is one of Scripture's most counter-cultural themes. To forgive is to release othersâand ourselvesâfrom bitterness, and to walk in the freedom God intends.",
-    hope:"When life feels heavy, this passage anchors us in the certainty that God's purposes will prevail. Biblical hope is not wishful thinkingâit is confident expectation rooted in who God is.",
-    obedience:"This passage shows why following God's Word mattersânot as a burden, but as a pathway to a full life. Obedience is the natural response of a heart that has truly encountered God.",
-    peace:"This passage points to a peace that transcends circumstancesâone that comes not from perfect situations, but from a settled trust in God's sovereignty over every area of life.",
+    prayer:"This passage opens a window into honest communication with God. Prayer is more than ritual—it is the lifeline through which we access His strength, wisdom, and comfort each day.",
+    forgiveness:"Forgiveness is one of Scripture's most counter-cultural themes. To forgive is to release others—and ourselves—from bitterness, and to walk in the freedom God intends.",
+    hope:"When life feels heavy, this passage anchors us in the certainty that God's purposes will prevail. Biblical hope is not wishful thinking—it is confident expectation rooted in who God is.",
+    obedience:"This passage shows why following God's Word matters—not as a burden, but as a pathway to a full life. Obedience is the natural response of a heart that has truly encountered God.",
+    peace:"This passage points to a peace that transcends circumstances—one that comes not from perfect situations, but from a settled trust in God's sovereignty over every area of life.",
     strength:"This scripture reminds us that our greatest strength is not our own ability, but God's power working in and through us. It is an invitation to stop striving alone and lean on Him.",
-    wisdom:"True wisdom begins with Godânot just knowledge, but a way of seeing and living that reflects His perspective on what truly matters in this life and beyond.",
+    wisdom:"True wisdom begins with God—not just knowledge, but a way of seeing and living that reflects His perspective on what truly matters in this life and beyond.",
     faithfulness:"This passage offers a timeless truth about God's character and His relationship with us. Rooted in ancient wisdom, it speaks with remarkable freshness to the questions we face today."
   };
   var A = {
@@ -1410,7 +1410,7 @@ function generateReflection(ref, verseText) {
     love:["Who in your life might need to experience God's love through you today?","Is there a relationship where you are being called to love more sacrificially?","How does knowing you are deeply loved by God change how you see yourself and others?"],
     courage:["What fear is keeping you from a step you know God is calling you toward?","How might remembering God's presence change how you face your biggest challenge right now?","Is there someone who needs your encouragement to take their own courageous step?"],
     prayer:["Is there a burden you have been carrying that needs to be brought honestly before God?","How might setting aside focused time for prayer change the tone of your day this week?","What would it look like to approach God with greater openness and trust?"],
-    forgiveness:["Is there someoneâor even yourselfâthat you need to extend forgiveness to?","How might holding onto unforgiveness be affecting your peace and your relationships?","What would one step toward reconciliation look like in a relationship that needs healing?"],
+    forgiveness:["Is there someone—or even yourself—that you need to extend forgiveness to?","How might holding onto unforgiveness be affecting your peace and your relationships?","What would one step toward reconciliation look like in a relationship that needs healing?"],
     hope:["What situation in your life most needs the anchor of biblical hope right now?","How can you encourage someone around you who is struggling to hold on?","What promise from God can you hold tightly to when discouragement comes this week?"],
     obedience:["Is there an area where you know what God is asking but have been hesitating to follow through?","What might change if you more consistently aligned your choices with God's Word?","How can you build habits that make obedience feel more natural and joyful?"],
     peace:["What worries or anxieties do you need to surrender to God today?","How can you cultivate more of God's peace in your daily routines and relationships?","Is there someone around you who needs the peace you have found in God?"],
@@ -1473,7 +1473,7 @@ init();
 <div class="copy-toast" id="copyToast"></div>
 
 <!-- ========== SETTINGS ========== -->
-<button class="settings-fab" id="settingsBtn" aria-label="Open settings">âï¸</button>
+<button class="settings-fab" id="settingsBtn" aria-label="Open settings">⚙️</button>
 
 <div class="zoom-overlay" id="zoomOverlay" onclick="if(event.target===this)closeZoom()">
   <div class="zoom-card">
@@ -1488,18 +1488,18 @@ init();
 
 <div class="settings-panel" id="settingsPanel" role="dialog" aria-label="Site settings">
   <div class="settings-panel-header">
-    <span class="settings-panel-title">âï¸ Customize</span>
-    <button class="settings-close-btn" id="settingsClose" aria-label="Close settings">â</button>
+    <span class="settings-panel-title">⚙️ Customize</span>
+    <button class="settings-close-btn" id="settingsClose" aria-label="Close settings">✕</button>
   </div>
   <div class="settings-body">
 
     <div class="settings-group">
       <div class="settings-group-label">Theme</div>
       <div class="settings-opts" id="themeOpts">
-        <button class="sopt active" data-theme="dawn"><span class="sopt-emoji">âï¸</span>Dawn</button>
-        <button class="sopt" data-theme="night"><span class="sopt-emoji">ð</span>Night</button>
-        <button class="sopt" data-theme="sage"><span class="sopt-emoji">ð¿</span>Sage</button>
-        <button class="sopt" data-theme="azure"><span class="sopt-emoji">ð</span>Azure</button>
+        <button class="sopt active" data-theme="dawn"><span class="sopt-emoji">☀️</span>Dawn</button>
+        <button class="sopt" data-theme="night"><span class="sopt-emoji">🌙</span>Night</button>
+        <button class="sopt" data-theme="sage"><span class="sopt-emoji">🌿</span>Sage</button>
+        <button class="sopt" data-theme="azure"><span class="sopt-emoji">💙</span>Azure</button>
       </div>
     </div>
 
@@ -1515,14 +1515,14 @@ init();
     <div class="settings-group">
       <div class="settings-group-label">Font Style</div>
       <div class="settings-opts cols-3" id="fontOpts">
-        <button class="sopt active" data-font="serif"><span class="sopt-emoji">ð</span>Serif</button>
-        <button class="sopt" data-font="sans"><span class="sopt-emoji">ð¤</span>Sans</button>
-        <button class="sopt" data-font="mono"><span class="sopt-emoji">ð»</span>Mono</button>
+        <button class="sopt active" data-font="serif"><span class="sopt-emoji">📖</span>Serif</button>
+        <button class="sopt" data-font="sans"><span class="sopt-emoji">🔤</span>Sans</button>
+        <button class="sopt" data-font="mono"><span class="sopt-emoji">💻</span>Mono</button>
       </div>
     </div>
 
     <div class="settings-group">
-      <div class="settings-group-label">ð¨ Highlight Color</div>
+      <div class="settings-group-label">🎨 Highlight Color</div>
       <div class="hl-color-row" id="hlColorOpts">
         <div class="hl-swatch active" data-hl="#FFD700" style="background:#FFD700" title="Gold"></div>
         <div class="hl-swatch" data-hl="#90EE90" style="background:#90EE90" title="Green"></div>
@@ -1532,7 +1532,7 @@ init();
       </div>
     </div>
     <div class="settings-group">
-      <div class="settings-group-label">ð Voice</div>
+      <div class="settings-group-label">🔊 Voice</div>
       <select class="voice-select" id="voiceSelect">
         <option value="">Default (system)</option>
       </select>
@@ -1693,12 +1693,12 @@ function closeStreakPopup() {
       try { lastShown = localStorage.getItem('dsStreakPopupDate') || ''; } catch(e){}
       if (lastShown !== today) {
         var msgs = [
-          "Youâre building a beautiful habit. Each morning you return to Godâs Word, your faith grows a little stronger.",
-          "Two days in a row â thatâs not an accident. God is drawing you closer, and youâre saying yes.",
+          "You’re building a beautiful habit. Each morning you return to God’s Word, your faith grows a little stronger.",
+          "Two days in a row — that’s not an accident. God is drawing you closer, and you’re saying yes.",
           "Consistency is a form of worship. Keep showing up and watch what God does in your life.",
-          "Every day you open Scripture, youâre planting a seed. Keep watering it with faithfulness.",
+          "Every day you open Scripture, you’re planting a seed. Keep watering it with faithfulness.",
           "The enemy hates this streak. Heaven celebrates it. Keep going!",
-          "Your dedication to Godâs Word is inspiring. Let it keep changing you from the inside out."
+          "Your dedication to God’s Word is inspiring. Let it keep changing you from the inside out."
         ];
         var msgIdx = (sd.streak - 2) % msgs.length;
         var popCount = document.getElementById('spCount');
@@ -1717,27 +1717,27 @@ function closeStreakPopup() {
 /* ----- PRAYER GENERATOR ----- */
 function generatePrayer(theme) {
   var P = {
-    faith: "Heavenly Father, I come before You today with a heart that is learning â sometimes trembling, sometimes doubting, but always reaching toward You. Your Word reminds me that faith is not the absence of uncertainty, but the decision to anchor my soul in Your promises even when the storms are loud and the way is dim. Forgive me for the moments when I have leaned on my own understanding rather than trusting in Your perfect plan. I surrender my fears, my questions, and my unbelief to You right now. Strengthen me to walk boldly in faith today, to take the next step even when I cannot see the destination. May my life become a living testimony that You are faithful â that those who trust in You are never put to shame. In Jesus' name, Amen.",
+    faith: "Heavenly Father, I come before You today with a heart that is learning — sometimes trembling, sometimes doubting, but always reaching toward You. Your Word reminds me that faith is not the absence of uncertainty, but the decision to anchor my soul in Your promises even when the storms are loud and the way is dim. Forgive me for the moments when I have leaned on my own understanding rather than trusting in Your perfect plan. I surrender my fears, my questions, and my unbelief to You right now. Strengthen me to walk boldly in faith today, to take the next step even when I cannot see the destination. May my life become a living testimony that You are faithful — that those who trust in You are never put to shame. In Jesus' name, Amen.",
 
-    love: "Lord of all love and grace, I confess that I do not always love the way You love. My love is conditional, distracted, and imperfect â but Yours is boundless, patient, and eternal. Pour Your love into me afresh this morning, until it overflows from every word I speak, every decision I make, and every person I encounter today. Help me to love not just those who are easy to love, but also those who are difficult, broken, or who have hurt me. Teach me to see others the way You see them â as image-bearers deserving of dignity and compassion. Let the love of Christ compel me in all I do today, so that when others see me, they may catch a glimpse of how deeply and tenderly You love them too. In the name of the One who is Love, Amen.",
+    love: "Lord of all love and grace, I confess that I do not always love the way You love. My love is conditional, distracted, and imperfect — but Yours is boundless, patient, and eternal. Pour Your love into me afresh this morning, until it overflows from every word I speak, every decision I make, and every person I encounter today. Help me to love not just those who are easy to love, but also those who are difficult, broken, or who have hurt me. Teach me to see others the way You see them — as image-bearers deserving of dignity and compassion. Let the love of Christ compel me in all I do today, so that when others see me, they may catch a glimpse of how deeply and tenderly You love them too. In the name of the One who is Love, Amen.",
 
-    courage: "God Almighty, I will not pretend that today feels easy. There are things ahead of me that make my heart race and my confidence falter. But Your Word says that You have not given me a spirit of fear, but of power and love and a sound mind. I claim that promise right now. Give me the courage to speak truth when silence would be easier, to do what is right when compromise is tempting, and to press forward when everything in me wants to retreat. You are the God who parted seas, who shut the mouths of lions, who raised the dead â and You are with me today. May that reality make me bold, not reckless, but confident in the One who goes before me and who will never leave my side. In the strong name of Jesus, Amen.",
+    courage: "God Almighty, I will not pretend that today feels easy. There are things ahead of me that make my heart race and my confidence falter. But Your Word says that You have not given me a spirit of fear, but of power and love and a sound mind. I claim that promise right now. Give me the courage to speak truth when silence would be easier, to do what is right when compromise is tempting, and to press forward when everything in me wants to retreat. You are the God who parted seas, who shut the mouths of lions, who raised the dead — and You are with me today. May that reality make me bold, not reckless, but confident in the One who goes before me and who will never leave my side. In the strong name of Jesus, Amen.",
 
-    prayer: "Father, thank You for the incredible gift of prayer â that I, a finite and flawed human being, can draw near to the infinite, holy God of all creation simply by calling on Your name. I do not take that lightly. Teach me to pray not just in moments of desperation, but in moments of joy, in moments of confusion, and in the quiet ordinary spaces of my day. Help me to be persistent in prayer, trusting that You hear every word and that Your timing is always perfect. When I do not know what to say, let Your Spirit intercede for me with groanings too deep for words. Let prayer become the breath of my soul â not a ritual I perform but a relationship I cherish. I surrender every anxiety, every burden, every hope, and every dream into Your capable, loving hands. In Jesus' name, Amen.",
+    prayer: "Father, thank You for the incredible gift of prayer — that I, a finite and flawed human being, can draw near to the infinite, holy God of all creation simply by calling on Your name. I do not take that lightly. Teach me to pray not just in moments of desperation, but in moments of joy, in moments of confusion, and in the quiet ordinary spaces of my day. Help me to be persistent in prayer, trusting that You hear every word and that Your timing is always perfect. When I do not know what to say, let Your Spirit intercede for me with groanings too deep for words. Let prayer become the breath of my soul — not a ritual I perform but a relationship I cherish. I surrender every anxiety, every burden, every hope, and every dream into Your capable, loving hands. In Jesus' name, Amen.",
 
-    forgiveness: "Merciful Father, Your forgiveness is one of the most staggering truths I know. That You would send Your own Son to bear the weight of every sin I have ever committed or ever will commit â that You would remove my transgressions as far as the east is from the west â I am undone by Your grace. Today I receive that forgiveness fully, not because I deserve it, but because Jesus paid a debt I could never pay. And Lord, as I receive Your forgiveness, help me to extend it to others. There are people in my life who have wounded me, disappointed me, or betrayed my trust. I know I cannot carry that bitterness â it only chains me. Give me the supernatural grace to release them, to let go, to forgive as You have forgiven me. Set both me and them free through the power of Your love. In the name of Jesus, Amen.",
+    forgiveness: "Merciful Father, Your forgiveness is one of the most staggering truths I know. That You would send Your own Son to bear the weight of every sin I have ever committed or ever will commit — that You would remove my transgressions as far as the east is from the west — I am undone by Your grace. Today I receive that forgiveness fully, not because I deserve it, but because Jesus paid a debt I could never pay. And Lord, as I receive Your forgiveness, help me to extend it to others. There are people in my life who have wounded me, disappointed me, or betrayed my trust. I know I cannot carry that bitterness — it only chains me. Give me the supernatural grace to release them, to let go, to forgive as You have forgiven me. Set both me and them free through the power of Your love. In the name of Jesus, Amen.",
 
-    hope: "Lord Jesus, You are the God of all hope, and I cling to that today. The world around me can feel heavy with sorrow, uncertainty, and loss â but You have spoken a different word over my life. You have promised that those who hope in You will not be disappointed. You are the anchor that holds when everything else gives way. Fill me with Your hope this morning â not wishful thinking, but a confident, unshakeable assurance that You are at work in every situation, even the ones I cannot understand. Help me to be a carrier of hope to those around me who are weary and discouraged. Let my life point others upward, toward the One who turns mourning into dancing, ashes into beauty, and darkness into glorious light. Because of Jesus, hope is never foolish â it is the most reasonable thing in the world. Amen.",
+    hope: "Lord Jesus, You are the God of all hope, and I cling to that today. The world around me can feel heavy with sorrow, uncertainty, and loss — but You have spoken a different word over my life. You have promised that those who hope in You will not be disappointed. You are the anchor that holds when everything else gives way. Fill me with Your hope this morning — not wishful thinking, but a confident, unshakeable assurance that You are at work in every situation, even the ones I cannot understand. Help me to be a carrier of hope to those around me who are weary and discouraged. Let my life point others upward, toward the One who turns mourning into dancing, ashes into beauty, and darkness into glorious light. Because of Jesus, hope is never foolish — it is the most reasonable thing in the world. Amen.",
 
-    obedience: "Lord, I want to be someone who not only hears Your Word but actually lives it. Forgive me for the times I have known the right thing to do and chosen my own comfort instead. Obedience is not always easy â it asks me to lay down my pride, my preferences, and my plans. But I know that the path of obedience is the path of life, of peace, of becoming more fully who You created me to be. Today, wherever Your Word calls me to act, speak, give, forgive, or trust â give me a willing and obedient heart. Help me to remember that every act of obedience is an act of love, and that Your commands are not burdens but invitations into abundant life. Let my yes be yes and my no be no. Let my life be a reflection of a heart that is wholly Yours. In Jesus' name, Amen.",
+    obedience: "Lord, I want to be someone who not only hears Your Word but actually lives it. Forgive me for the times I have known the right thing to do and chosen my own comfort instead. Obedience is not always easy — it asks me to lay down my pride, my preferences, and my plans. But I know that the path of obedience is the path of life, of peace, of becoming more fully who You created me to be. Today, wherever Your Word calls me to act, speak, give, forgive, or trust — give me a willing and obedient heart. Help me to remember that every act of obedience is an act of love, and that Your commands are not burdens but invitations into abundant life. Let my yes be yes and my no be no. Let my life be a reflection of a heart that is wholly Yours. In Jesus' name, Amen.",
 
-    peace: "Prince of Peace, I need You. The noise of this world â the worry, the rushing, the endless demands â can crowd out the quiet that my soul was made for. Your Word promises a peace that surpasses all understanding, a peace that guards my heart and mind in Christ Jesus. I receive that peace right now as a gift from Your hand. Help me to stop striving and to simply rest in the truth that You are God â that You are sovereign, that You are good, and that You are in control of every detail of my life. Where there is conflict in my relationships, bring reconciliation. Where there is anxiety in my mind, bring stillness. Where there is chaos around me, let me carry Your unexplainable calm into every room I enter today. Let me be a peacemaker â a child of God who reflects the peace of heaven everywhere I go. Amen.",
+    peace: "Prince of Peace, I need You. The noise of this world — the worry, the rushing, the endless demands — can crowd out the quiet that my soul was made for. Your Word promises a peace that surpasses all understanding, a peace that guards my heart and mind in Christ Jesus. I receive that peace right now as a gift from Your hand. Help me to stop striving and to simply rest in the truth that You are God — that You are sovereign, that You are good, and that You are in control of every detail of my life. Where there is conflict in my relationships, bring reconciliation. Where there is anxiety in my mind, bring stillness. Where there is chaos around me, let me carry Your unexplainable calm into every room I enter today. Let me be a peacemaker — a child of God who reflects the peace of heaven everywhere I go. Amen.",
 
-    strength: "Almighty God, I am tired. I will not pretend otherwise. The weight of responsibilities, the drain of difficult seasons, and the slow accumulation of everyday battles have left me weary. But Your Word says that those who wait upon You will renew their strength â that they will mount up with wings like eagles, that they will run and not be weary, walk and not faint. I am waiting on You right now. Fill me with strength that is not my own â strength that comes from the inexhaustible reservoir of Your Spirit living inside me. Help me not to lean on my own energy today but to draw moment by moment from Your limitless power. Let every act of service, every conversation, every challenge I face today be done in the strength that You supply, so that You receive all the glory. In the mighty name of Jesus, Amen.",
+    strength: "Almighty God, I am tired. I will not pretend otherwise. The weight of responsibilities, the drain of difficult seasons, and the slow accumulation of everyday battles have left me weary. But Your Word says that those who wait upon You will renew their strength — that they will mount up with wings like eagles, that they will run and not be weary, walk and not faint. I am waiting on You right now. Fill me with strength that is not my own — strength that comes from the inexhaustible reservoir of Your Spirit living inside me. Help me not to lean on my own energy today but to draw moment by moment from Your limitless power. Let every act of service, every conversation, every challenge I face today be done in the strength that You supply, so that You receive all the glory. In the mighty name of Jesus, Amen.",
 
-    wisdom: "Father of lights, from whom every good and perfect gift comes â I ask today for wisdom. Not merely knowledge or cleverness, but the deep, God-given wisdom that sees life through Your eyes, that weighs decisions by Your values, and that responds to people with grace and truth in equal measure. You have promised that if I ask for wisdom, You will give it generously without finding fault. I am asking. There are decisions before me that I do not fully understand. There are situations that require more than I have on my own. Guide my thoughts, my words, my choices today. Let Your Word be the lamp that lights every step and the compass that orients my heart. And let the wisdom You give me not just benefit me, but bless and serve everyone around me. In Jesus' name, Amen.",
+    wisdom: "Father of lights, from whom every good and perfect gift comes — I ask today for wisdom. Not merely knowledge or cleverness, but the deep, God-given wisdom that sees life through Your eyes, that weighs decisions by Your values, and that responds to people with grace and truth in equal measure. You have promised that if I ask for wisdom, You will give it generously without finding fault. I am asking. There are decisions before me that I do not fully understand. There are situations that require more than I have on my own. Guide my thoughts, my words, my choices today. Let Your Word be the lamp that lights every step and the compass that orients my heart. And let the wisdom You give me not just benefit me, but bless and serve everyone around me. In Jesus' name, Amen.",
 
-    faithfulness: "Lord, morning by morning new mercies I see â and this morning is no exception. Your faithfulness is breathtaking. Through every season of my life â the seasons of joy and the seasons of grief, the seasons of abundance and the seasons of want â You have been there. You have never broken a single promise. You have never abandoned me, never lost track of me, never stopped working on my behalf. Thank You. I want to respond to Your faithfulness with faithfulness of my own â faithful in prayer, faithful in worship, faithful in loving others, faithful in the little things that nobody sees but You. Teach me to treasure each day as a gift from Your hand. Help me to live not for the applause of the world but for the one thing that matters: hearing You say, âWell done, good and faithful servant.â Let that be the longing that shapes everything I do today and every day. In Jesusâ faithful name, Amen."
+    faithfulness: "Lord, morning by morning new mercies I see — and this morning is no exception. Your faithfulness is breathtaking. Through every season of my life — the seasons of joy and the seasons of grief, the seasons of abundance and the seasons of want — You have been there. You have never broken a single promise. You have never abandoned me, never lost track of me, never stopped working on my behalf. Thank You. I want to respond to Your faithfulness with faithfulness of my own — faithful in prayer, faithful in worship, faithful in loving others, faithful in the little things that nobody sees but You. Teach me to treasure each day as a gift from Your hand. Help me to live not for the applause of the world but for the one thing that matters: hearing You say, ‘Well done, good and faithful servant.’ Let that be the longing that shapes everything I do today and every day. In Jesus’ faithful name, Amen."
   };
   return P[theme] || P.faithfulness;
 }
@@ -1753,9 +1753,9 @@ function copyCard(titleId, refId, textId) {
   var title = (document.getElementById(titleId)||{}).textContent||'';
   var ref   = (document.getElementById(refId)||{}).textContent||'';
   var text  = (document.getElementById(textId)||{}).innerText||'';
-  var out = title + (ref?' ('+ref+')':'') + '\n\n' + text + '\n\nâ Daily Scripture Â· kmk2123.github.io/daily-scripture/';
+  var out = title + (ref?' ('+ref+')':'') + '\n\n' + text + '\n\n— Daily Scripture · kmk2123.github.io/daily-scripture/';
   navigator.clipboard.writeText(out)
-    .then(function(){ showToast('â Copied to clipboard!'); })
+    .then(function(){ showToast('✅ Copied to clipboard!'); })
     .catch(function(){ showToast('Long-press to copy text manually'); });
 }
 
@@ -1781,7 +1781,7 @@ function openZoom(textId) {
   var refEl = card ? card.querySelector('[class*="reference"], h4, .card-ref') : null;
   var titleEl = card ? card.querySelector('h3, .card-title, [class*="title"]') : null;
   document.getElementById('zoomLabel').textContent = labelEl ? labelEl.innerText : '';
-  document.getElementById('zoomRef').textContent = (titleEl ? titleEl.innerText + ' â ' : '') + (refEl ? refEl.innerText : '');
+  document.getElementById('zoomRef').textContent = (titleEl ? titleEl.innerText + ' — ' : '') + (refEl ? refEl.innerText : '');
   var ztEl=document.getElementById('zoomText'); ztEl.innerText=el.innerText; ztEl.style.fontFamily=window.getComputedStyle(el).fontFamily;
   var ov = document.getElementById('zoomOverlay');
   ov.style.display = 'flex'; ov.classList.add('open');
@@ -1800,7 +1800,7 @@ function toggleAudio(textId, btnId) {
     synth.cancel();
     if (_ttsId === textId) {
       _ttsId = null;
-      if (btn) { btn.textContent = 'ð Read Aloud'; btn.classList.remove('playing'); }
+      if (btn) { btn.textContent = '🔊 Read Aloud'; btn.classList.remove('playing'); }
       return;
     }
   }
@@ -1810,10 +1810,10 @@ function toggleAudio(textId, btnId) {
   utt.rate = 0.87; utt.pitch = 0.9;
   utt.onend = function() {
     _ttsId = null;
-    if (btn) { btn.textContent = 'ð Read Aloud'; btn.classList.remove('playing'); }
+    if (btn) { btn.textContent = '🔊 Read Aloud'; btn.classList.remove('playing'); }
   };
   _ttsId = textId;
-  if (btn) { btn.textContent = 'â¹ï¸ Stop'; btn.classList.add('playing'); }
+  if (btn) { btn.textContent = '⏹️ Stop'; btn.classList.add('playing'); }
   var prefs5 = {}; try { prefs5 = JSON.parse(localStorage.getItem('dsPrefs')||'{}'); } catch(e) {}
   var voices = window.speechSynthesis.getVoices();
   if (prefs5.voice && voices.length) {
@@ -1855,7 +1855,7 @@ function setupHighlight(textId) {
   el.parentNode.insertBefore(hlBtn, el);
   var zoomHint = document.createElement('div');
   zoomHint.className = 'zoom-hint';
-  zoomHint.textContent = 'â Tap verse to zoom in';
+  zoomHint.textContent = '✔ Tap verse to zoom in';
   el.parentNode.insertBefore(zoomHint, el);
   el.addEventListener('click', function(e) {
     if (!hlMode) { openZoom(textId); return; }
